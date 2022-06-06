@@ -9,6 +9,7 @@ public class NetCalculator {
     private int taxRate;
 
     public NetCalculator() {
+
         this.zusPensionRate = 9.76d;
         this.zusDisabilityRate = 1.50d;
         this.zusSicknessRate = 2.45d;
