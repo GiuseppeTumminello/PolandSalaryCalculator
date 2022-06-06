@@ -42,7 +42,7 @@ public class NetCalculator {
     }
 
 
-    public double netCalculator() {
+    public double getNet() {
         return this.gross - (getZusTotal() + getHealthNfzTotal() + getAdvancePaymentTotal());
 
     }
@@ -60,6 +60,11 @@ public class NetCalculator {
 
         return this.gross * zusSicknessRate / 100;
 
+    }
+
+
+    public double getAnnualSum(){
+        return this.gross * 12;
     }
 
 
@@ -86,4 +91,7 @@ public class NetCalculator {
     public int getTaxRate() {
         return taxRate;
     }
+
+
+
 }
