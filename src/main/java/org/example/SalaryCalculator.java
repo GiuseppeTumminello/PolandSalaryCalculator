@@ -1,6 +1,6 @@
 package org.example;
 
-public class NetCalculator {
+public class SalaryCalculator {
     private final double zusPensionRate;
     private final double zusDisabilityRate;
     private final double zusSicknessRate;
@@ -8,18 +8,21 @@ public class NetCalculator {
     private double gross;
     private int taxRate;
 
-    public NetCalculator() {
+    public SalaryCalculator(double gross) {
 
         this.zusPensionRate = 9.76d;
         this.zusDisabilityRate = 1.50d;
         this.zusSicknessRate = 2.45d;
         this.healthNFZRate = 9.0d;
-        this.taxRate = 17;
+        this.gross  = gross;
+        if (gross * 12 > 120_000.0){
+            this.taxRate = 32;
+        } else {
+            this.taxRate = 17;
+        }
     }
 
-    public void setGross(double gross) {
-            this.gross = gross;
-    }
+
 
     public double getZusTotal() {
         return getZusDisability() + getZusPension() + getZusSickness();
@@ -32,7 +35,7 @@ public class NetCalculator {
 
     public double getAdvancePaymentTotal() {
         if (this.gross * 12 < 120_000.00) {
-
+            this.taxRate = 17;
             return (this.gross - (getHealthNfzTotal() + getZusTotal())) * 8.32d / 100;
 
         } else {
