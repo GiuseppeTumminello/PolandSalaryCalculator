@@ -1,42 +1,64 @@
 package junit5;
 
 import org.example.SalaryCalculator;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-
+import org.junit.jupiter.params.provider.NullSource;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.math.BigDecimal;
 
 
 class SalaryCalculatorTest {
 
     private SalaryCalculator salaryCalculator;
+    private final PrintStream standardOut = System.out;
+    private final ByteArrayOutputStream outputStreamCaptor;
+
+    public SalaryCalculatorTest() {
+        this.outputStreamCaptor = new ByteArrayOutputStream();
+
+    }
+
+    @BeforeEach
+    public void setUp() {
+        System.setOut(new PrintStream(outputStreamCaptor));
+
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.setOut(standardOut);
+
+
+    }
 
     @ParameterizedTest
-    @CsvSource({"6000.00, 822.6000", "7000.00, 959.7000", "15891.68, 2178.7492"})
+    @CsvSource({"6000, 822.60", "7000, 959.70", "15891.68, 2178.76"})
     void getZusTotal(BigDecimal input, BigDecimal expected) {
         salaryCalculator = new SalaryCalculator(input);
         Assertions.assertEquals(expected, salaryCalculator.getZusTotal());
     }
 
     @ParameterizedTest
-    @CsvSource({"6000.00, 465.96600", "7000.00, 543.62700", "15891.68, 1234.16377"})
+    @CsvSource({"6000, 465.97", "7000, 543.63", "15891.68, 1234.16"})
     void getHealthNfzTotal(BigDecimal input, BigDecimal expected) {
         salaryCalculator = new SalaryCalculator(input);
         Assertions.assertEquals(expected, salaryCalculator.getHealthNfzTotal());
     }
 
     @ParameterizedTest
-    @CsvSource({"6000.00, 391.9913088", "7000.00, 457.3231936", "15891.68, 1786.9594387"})
+    @CsvSource({"6000, 391.99", "7000, 457.32", "15891.68, 1786.96"})
     void getAdvancePaymentTotal(BigDecimal input, BigDecimal expected) {
         salaryCalculator = new SalaryCalculator(input);
         Assertions.assertEquals(expected, salaryCalculator.getAdvancePaymentTotal());
     }
 
     @ParameterizedTest
-    @CsvSource({"6000.00, 4319.4426912", "7000.00, 5039.3498064", "15891.68, 10691.8075913"})
+    @CsvSource({"6000, 4319.44", "7000, 5039.35", "15891.68, 10691.80"})
     void getNet(BigDecimal input, BigDecimal expected) {
         salaryCalculator = new SalaryCalculator(input);
         Assertions.assertEquals(expected, salaryCalculator.getNet());
@@ -44,31 +66,55 @@ class SalaryCalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"6000.00,585.60000", "7000.00, 683.2", "15891.68, 1551.027968"})
+    @CsvSource({"6000.,585.60", "7000, 683.20", "15891.68, 1551.03"})
     void getZusPension(BigDecimal input, BigDecimal expected) {
         salaryCalculator = new SalaryCalculator(input);
-        Assertions.assertEquals(expected, salaryCalculator.getNet());
+        Assertions.assertEquals(expected, salaryCalculator.getZusPension());
 
     }
 
-    @Test
-    void getZusDisability() {
+    @ParameterizedTest
+    @CsvSource({"6000,90.00", "7000, 105.00", "15891.68, 238.38"})
+    void getZusDisability(BigDecimal input, BigDecimal expected) {
+        salaryCalculator = new SalaryCalculator(input);
+        Assertions.assertEquals(expected, salaryCalculator.getZusDisability());
     }
 
-    @Test
-    void getZusSickness() {
+    @ParameterizedTest
+    @CsvSource({"6000, 147.00", "7000, 171.50", "15891.68, 389.35"})
+    void getZusSickness(BigDecimal input, BigDecimal expected) {
+        salaryCalculator = new SalaryCalculator(input);
+        Assertions.assertEquals(expected, salaryCalculator.getZusSickness());
     }
 
-    @Test
-    void getAnnualSum() {
+    @ParameterizedTest
+    @CsvSource({"6000, 72000.00", "7000, 84000.00", "15891.68, 190700.16"})
+    void getAnnualSum(BigDecimal input, BigDecimal expected) {
+        salaryCalculator = new SalaryCalculator(input);
+        Assertions.assertEquals(expected, salaryCalculator.getAnnualSum());
     }
 
 
-    @Test
-    void getGross() {
+    @ParameterizedTest
+    @CsvSource({"6000, 6000", "7000, 7000", "15891.68, 15891.68"})
+    void getGross(BigDecimal input, BigDecimal expected) {
+        salaryCalculator = new SalaryCalculator(input);
+        Assertions.assertEquals(expected, salaryCalculator.getGross());
     }
 
-    @Test
-    void getTaxRate() {
+    @ParameterizedTest
+    @CsvSource({"6000, 17", "7000, 17", "15891.68, 32"})
+    void getTaxRate(BigDecimal input, int expected) {
+        salaryCalculator = new SalaryCalculator(input);
+        Assertions.assertEquals(expected, salaryCalculator.getTaxRate());
     }
+
+    @ParameterizedTest
+    @NullSource
+    void testNullCase(BigDecimal input) {
+        salaryCalculator = new SalaryCalculator(input);
+        Assertions.assertEquals("Null value cannot be passed", outputStreamCaptor.toString().trim());
+    }
+
+
 }
