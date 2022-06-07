@@ -6,8 +6,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-
         BigDecimal gross;
 
         do {
@@ -15,11 +13,10 @@ public class Main {
             while (!scanner.hasNextBigDecimal()) {
                 System.out.println("That's not a valid number, please try again: ");
                 scanner.next();
-
             }
 
             gross = scanner.nextBigDecimal();
-        } while (gross.compareTo(new BigDecimal("2000.00") ) < 0);
+        } while (gross.compareTo(new BigDecimal("2000.00")) < 0);
         SalaryCalculator salaryCalculator = new SalaryCalculator(gross);
         System.out.println();
         System.out.println("The net amount of the gross value of " + salaryCalculator.getGross() + " is " + salaryCalculator.getNet() +
@@ -35,7 +32,6 @@ public class Main {
 
 
         );
-
 
     }
 }
