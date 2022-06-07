@@ -1,17 +1,17 @@
 package junit5;
 
 import org.example.SalaryCalculator;
-import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullSource;
-import static org.assertj.core.api.Assertions.*;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.math.BigDecimal;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 class SalaryCalculatorTest {
