@@ -1,79 +1,79 @@
 package org.example;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class SalaryCalculator {
     private final double zusPensionRate;
     private final double zusDisabilityRate;
     private final double zusSicknessRate;
     private final double healthNFZRate;
-    private double gross;
+    private final BigDecimal gross;
     private int taxRate;
 
-    public SalaryCalculator(double gross) {
+    public SalaryCalculator(BigDecimal gross) {
 
         this.zusPensionRate = 9.76d;
         this.zusDisabilityRate = 1.50d;
         this.zusSicknessRate = 2.45d;
         this.healthNFZRate = 9.0d;
         this.gross  = gross;
-        if (gross * 12 > 120_000.0){
+        if (gross.multiply(BigDecimal.valueOf(12.0)).compareTo(BigDecimal.valueOf(120_000.0)) > 0.){
             this.taxRate = 32;
         } else {
             this.taxRate = 17;
         }
     }
 
-    public void setGross(double gross) {
-        if (gross < 2000){
-            throw new IllegalArgumentException();
-        }else {
 
-        }
-    }
 
-    public double getZusTotal() {
-        return getZusDisability() + getZusPension() + getZusSickness();
+    public BigDecimal getZusTotal() {
+        return getZusDisability().add(getZusPension()).add(getZusSickness());
 
     }
 
-    public double getHealthNfzTotal() {
-        return (this.gross - getZusTotal()) * healthNFZRate / 100;
+    public BigDecimal getHealthNfzTotal() {
+        return this.gross.subtract(getZusTotal()).multiply(BigDecimal.valueOf(healthNFZRate)).divide(BigDecimal.valueOf(100),RoundingMode.HALF_UP);
+        //return (this.gross - getZusTotal()) * healthNFZRate / 100;
     }
 
-    public double getAdvancePaymentTotal() {
-        if (this.gross * 12 < 120_000.00) {
+    public BigDecimal getAdvancePaymentTotal() {
+        if (this.getAnnualSum().compareTo(BigDecimal.valueOf(120_000.00)) < 0) {
             this.taxRate = 17;
-            return (this.gross - (getHealthNfzTotal() + getZusTotal())) * 8.32d / 100;
+            return (this.gross .subtract( (getHealthNfzTotal().add(getZusTotal()) ))).multiply(BigDecimal.valueOf(8.32)).divide(BigDecimal.valueOf(100.0), RoundingMode.HALF_UP);
 
         } else {
             this.taxRate = 32;
-            return (this.gross - (getHealthNfzTotal() + getZusTotal())) * 14.32d / 100;
+             return (this.gross .subtract( (getHealthNfzTotal().add(getZusTotal()) ))).multiply(BigDecimal.valueOf(14.32)).divide(BigDecimal.valueOf(100.0),RoundingMode.HALF_UP);
         }
     }
 
 
-    public double getNet() {
-        return this.gross - (getZusTotal() + getHealthNfzTotal() + getAdvancePaymentTotal());
+    public BigDecimal getNet() {
+        return this.gross.subtract(getZusTotal().add(getHealthNfzTotal()).add(getAdvancePaymentTotal()));
 
     }
 
-    public double getZusPension() {
-        return this.gross * zusPensionRate / 100;
+    public BigDecimal getZusPension() {
+        return this.gross.multiply(BigDecimal.valueOf(zusPensionRate)).divide(BigDecimal.valueOf(100.0), RoundingMode.HALF_UP);
+        //return this.gross * zusPensionRate / 100;
     }
 
-    public double getZusDisability() {
-        return this.gross * zusDisabilityRate / 100;
-
-    }
-
-    public double getZusSickness() {
-
-        return this.gross * zusSicknessRate / 100;
+    public BigDecimal getZusDisability() {
+        return this.gross.multiply(BigDecimal.valueOf(zusDisabilityRate)).divide(BigDecimal.valueOf(100.0), RoundingMode.HALF_UP);
+        //return this.gross * zusDisabilityRate / 100;
 
     }
 
+    public BigDecimal getZusSickness() {
+        return this.gross.multiply(BigDecimal.valueOf(zusSicknessRate)).divide(BigDecimal.valueOf(100.0), RoundingMode.HALF_UP);
+        //return this.gross * zusSicknessRate / 100;
 
-    public double getAnnualSum(){
-        return this.gross * 12;
+    }
+
+
+    public BigDecimal getAnnualSum(){
+        return this.gross.multiply(BigDecimal.valueOf(12.0));
     }
 
 
@@ -93,7 +93,7 @@ public class SalaryCalculator {
         return healthNFZRate;
     }
 
-    public double getGross() {
+    public BigDecimal getGross() {
         return gross;
     }
 
