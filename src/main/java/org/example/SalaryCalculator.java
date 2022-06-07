@@ -18,8 +18,8 @@ public class SalaryCalculator {
         this.zusSicknessRate = 2.45d;
         this.healthNFZRate = 9.0d;
         this.gross = gross;
-        if (gross == null){
-            System.out.println("Null value cannot be passed");
+        if (gross == null || gross.compareTo(BigDecimal.valueOf(2000.00)) < 0.0){
+            System.out.println("Null value or Value less than 2000.00 cannot be passed");
         }
         else if (gross.multiply(BigDecimal.valueOf(12.0)).compareTo(BigDecimal.valueOf(120_000.00d)) > 0.0d) {
             this.taxRate = 32;

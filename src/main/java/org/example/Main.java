@@ -15,6 +15,7 @@ public class Main {
             while (!scanner.hasNextBigDecimal()) {
                 System.out.println("That's not a valid number, please try again: ");
                 scanner.next();
+
             }
 
             gross = scanner.nextBigDecimal();

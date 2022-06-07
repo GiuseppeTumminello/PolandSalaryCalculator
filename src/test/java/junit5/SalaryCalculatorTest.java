@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullSource;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.math.BigDecimal;
@@ -113,7 +114,15 @@ class SalaryCalculatorTest {
     @NullSource
     void testNullCase(BigDecimal input) {
         salaryCalculator = new SalaryCalculator(input);
-        Assertions.assertEquals("Null value cannot be passed", outputStreamCaptor.toString().trim());
+        Assertions.assertEquals("Null value or Value less than 2000.00 cannot be passed", outputStreamCaptor.toString().trim());
+    }
+
+
+    @ParameterizedTest
+    @CsvSource({"-2000.5515158151522615", "-1.7976931348623157E308", "1999.99", "0"})
+    void testLessThanTwoThousand(BigDecimal input) {
+        salaryCalculator = new SalaryCalculator(input);
+        Assertions.assertEquals("Null value or Value less than 2000.00 cannot be passed", outputStreamCaptor.toString().trim());
     }
 
 
