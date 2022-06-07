@@ -9,6 +9,7 @@ public class Main {
 
 
         BigDecimal gross;
+
         do {
             System.out.println("Please enter a gross amount greater or equal to 2000.0");
             while (!scanner.hasNextBigDecimal()) {
