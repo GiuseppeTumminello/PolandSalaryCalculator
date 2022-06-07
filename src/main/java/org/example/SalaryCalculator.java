@@ -22,7 +22,13 @@ public class SalaryCalculator {
         }
     }
 
+    public void setGross(double gross) {
+        if (gross < 2000){
+            throw new IllegalArgumentException();
+        }else {
 
+        }
+    }
 
     public double getZusTotal() {
         return getZusDisability() + getZusPension() + getZusSickness();

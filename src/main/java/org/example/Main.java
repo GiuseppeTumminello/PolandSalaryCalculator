@@ -1,12 +1,10 @@
 package org.example;
 
-import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
 
 
         double gross;
@@ -17,7 +15,7 @@ public class Main {
                 scanner.next();
             }
 
-            gross = scanner.nextInt();
+            gross = scanner.nextDouble();
         } while (gross < 2000.0);
         SalaryCalculator salaryCalculator = new SalaryCalculator(gross);
         System.out.println();
