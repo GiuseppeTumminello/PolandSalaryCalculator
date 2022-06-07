@@ -3,6 +3,7 @@ package junit5;
 import org.example.SalaryCalculator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullSource;
@@ -138,6 +139,29 @@ class SalaryCalculatorTest {
         //Assertions.assertEquals("Null value or Value less than 2000.00 cannot be passed", outputStreamCaptor.toString().trim());
         assertThat(outputStreamCaptor.toString().trim()).isEqualTo("Null value or Value less than 2000.00 cannot be passed");
     }
+
+    @Test
+    void  getZusPensionRate() {
+        salaryCalculator = new SalaryCalculator(BigDecimal.valueOf(8000.0));
+        assertThat(salaryCalculator.getZusPensionRate()).isEqualTo(9.76);
+    }
+    @Test
+    public void getZusDisabilityRate() {
+        salaryCalculator = new SalaryCalculator(BigDecimal.valueOf(8000.0));
+        assertThat(salaryCalculator.getZusDisabilityRate()).isEqualTo(1.50);
+    }
+    @Test
+    public void getZusSicknessRate() {
+        salaryCalculator = new SalaryCalculator(BigDecimal.valueOf(8000.0));
+        assertThat(salaryCalculator.getZusSicknessRate()).isEqualTo(2.45);
+    }
+    @Test
+    public void getHealthNFZRate() {
+        salaryCalculator = new SalaryCalculator(BigDecimal.valueOf(8000.0));
+         assertThat(salaryCalculator.getHealthNFZRate()).isEqualTo(9.0);
+    }
+
+
 
 
 }
