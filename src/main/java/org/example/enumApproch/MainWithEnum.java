@@ -7,12 +7,13 @@ public class MainWithEnum {
 
     public static void main(String[] args) {
 
-        var salary= userInput();
+        var salary = userInput();
 
-        for (var values : SalaryCalculatorEnum.values()){
-            System.out.print("\n"+ values.getDescription() );
+        for (var values : SalaryCalculatorEnum.values()) {
+            System.out.print("\n" + values.getDescription());
             System.out.print(values.getOperator().apply(salary));
         }
+
 
     }
 
