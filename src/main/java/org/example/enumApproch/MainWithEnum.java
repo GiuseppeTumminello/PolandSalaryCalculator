@@ -28,10 +28,10 @@ public class MainWithEnum {
             }
 
             grossSalary = scanner.nextBigDecimal();
-            return grossSalary;
+
 
         } while (grossSalary.compareTo(new BigDecimal("2000.00")) < 0);
 
-
+        return grossSalary;
     }
 }
