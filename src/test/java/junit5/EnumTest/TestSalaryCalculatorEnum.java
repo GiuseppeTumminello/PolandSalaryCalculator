@@ -1,11 +1,9 @@
 package junit5.EnumTest;
 
 import org.example.enumApproch.SalaryCalculatorEnum;
-import org.example.oldWay.SalaryCalculator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.io.PrintStream;
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
