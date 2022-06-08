@@ -1,6 +1,6 @@
-package junit5;
+package junit5.OldTest;
 
-import org.example.SalaryCalculator;
+import org.example.oldWay.SalaryCalculator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

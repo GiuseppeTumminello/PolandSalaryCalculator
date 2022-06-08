@@ -1,12 +1,15 @@
-package org.example;
+package org.example.oldWay;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         BigDecimal gross;
+
+
 
         do {
             System.out.println("Please enter a gross amount greater or equal to 2000.00");
@@ -18,7 +21,7 @@ public class Main {
             gross = scanner.nextBigDecimal();
         } while (gross.compareTo(new BigDecimal("2000.00")) < 0);
         SalaryCalculator salaryCalculator = new SalaryCalculator(gross);
-        System.out.println();
+
         System.out.println("The net amount of the gross value of " + salaryCalculator.getGross() + " is " + salaryCalculator.getNet() +
                 "\nThe employee zus costs are as follow: " +
                 "\nZus pension: " + salaryCalculator.getZusPension() + ", rate: " + salaryCalculator.getZusPensionRate() +
@@ -34,6 +37,8 @@ public class Main {
         );
 
     }
+
+
 
 
 
