@@ -15,13 +15,13 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-class SalaryCalculatorTest {
+class TestSalaryCalculator {
 
     private SalaryCalculator salaryCalculator;
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor;
 
-    public SalaryCalculatorTest() {
+    public TestSalaryCalculator() {
         this.outputStreamCaptor = new ByteArrayOutputStream();
 
     }
