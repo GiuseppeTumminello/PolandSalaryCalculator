@@ -1,5 +1,7 @@
 package org.example.enumApproch;
 
+import org.example.enumApproch.Service.DatabaseServiceImpl;
+
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -12,6 +14,9 @@ public class MainWithEnum {
 
 
         var salary = userInput();
+        DatabaseServiceImpl databaseService = new DatabaseServiceImpl();
+
+        System.out.println(databaseService.getDataByJobTitle("software engineer", "junior"));
 
         for (var values : SalaryCalculatorEnum.values()) {
             System.out.print("\n" + values.getDescription());
