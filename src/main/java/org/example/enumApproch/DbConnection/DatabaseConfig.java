@@ -7,5 +7,7 @@ public class DatabaseConfig {
     protected static final String USER = "postgres";
     protected static final String DATABASE_NAME = "postgres";
 
+    protected static final String DATABASE_LOCAL_URL = "jdbc:postgresql://"+DatabaseConfig.HOST+ ":" + DatabaseConfig.PORT + "/";
+
 
 }

@@ -1,11 +1,15 @@
 package org.example.enumApproch;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class MainWithEnum {
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
+
+
+
 
         var salary = userInput();
 

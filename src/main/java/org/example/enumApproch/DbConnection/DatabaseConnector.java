@@ -23,6 +23,7 @@ public class DatabaseConnector {
 
             return DriverManager.getConnection(url, properties);
 
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
