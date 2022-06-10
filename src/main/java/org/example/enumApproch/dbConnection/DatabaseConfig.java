@@ -1,4 +1,4 @@
-package org.example.enumApproch.DbConnection;
+package org.example.enumApproch.dbConnection;
 
 public class DatabaseConfig {
     protected static final String HOST = "localhost";

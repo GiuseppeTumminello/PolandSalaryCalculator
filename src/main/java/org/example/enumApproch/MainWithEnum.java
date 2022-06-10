@@ -1,6 +1,6 @@
 package org.example.enumApproch;
 
-import org.example.enumApproch.Service.AverageSalaryServiceImpl;
+import org.example.enumApproch.service.JobTitleServiceImpl;
 import org.example.enumApproch.menu.Menu;
 
 import java.math.BigDecimal;
@@ -8,12 +8,16 @@ import java.math.BigDecimal;
 public class MainWithEnum {
 
     public static void main(String[] args) {
+
+
         Menu menu = new Menu();
-        AverageSalaryServiceImpl averageSalaryService = new AverageSalaryServiceImpl();
+        JobTitleServiceImpl averageSalaryService = new JobTitleServiceImpl();
         BigDecimal grossSalary = menu.userInput();
-        averageSalaryService.save(grossSalary);
+        //averageSalaryService.save(grossSalary);
         extracted(grossSalary);
         menu.checkAverage(grossSalary);
+
+
 
 
     }

@@ -1,4 +1,4 @@
-package org.example.enumApproch.DbConnection;
+package org.example.enumApproch.dbConnection;
 
 
 import java.sql.Connection;

@@ -1,16 +1,16 @@
 package org.example.enumApproch.menu;
 
-import org.example.enumApproch.Service.AverageSalaryServiceImpl;
+import org.example.enumApproch.service.JobTitleServiceImpl;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Menu {
 
-    private final AverageSalaryServiceImpl averageSalaryService;
+    private final JobTitleServiceImpl averageSalaryService;
 
     public Menu() {
-        this.averageSalaryService = new AverageSalaryServiceImpl();
+        this.averageSalaryService = new JobTitleServiceImpl();
     }
 
     public  BigDecimal userInput() {
@@ -32,6 +32,7 @@ public class Menu {
 
     public  void checkAverage(BigDecimal grossSalary) {
 
+
         int choice;
         Scanner scanner = new Scanner(System.in);
         do {
@@ -45,11 +46,11 @@ public class Menu {
                 case 1:
                     int jobId;
                     do {
-                        System.out.println("Enter 1 - software engineer" +
-                                "\nEnter 2 - for project manager" +
-                                "\nEnter 3 - for scum master" +
-                                "\nEnter 4 -for fund accounting" +
-                                "\n" + "Enter 5 - DevOps engineer");
+
+                        for (var jobTitle : averageSalaryService.getJobTitles()){
+                            System.out.println("Enter " + jobTitle.getId() + " - for " + jobTitle.getJobTitle());
+                        }
+//
                         while (!scanner.hasNextInt()) {
                             System.out.println("That's not a valid number, please try again: ");
                             scanner.next();
@@ -58,7 +59,7 @@ public class Menu {
 
 
                     } while (jobId > 5 || jobId < 1);
-                    BigDecimal averageSalary = averageSalaryService.getById(jobId);
+                    BigDecimal averageSalary = averageSalaryService.getJobTitleById(jobId).getGrossAverage();
                     if (averageSalary.compareTo(grossSalary.multiply(BigDecimal.valueOf(12))) < 0) {
                         System.out.println("Your salary is greater than " + averageSalary + " yearly");
                     } else {
