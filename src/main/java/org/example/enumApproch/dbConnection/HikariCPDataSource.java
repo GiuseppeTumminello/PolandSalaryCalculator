@@ -19,7 +19,6 @@ public class HikariCPDataSource {
         configuration.addDataSourceProperty("prepStmtCacheSize", "250");
         configuration.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
         dataSource = new HikariDataSource(configuration);
-
     }
 
 

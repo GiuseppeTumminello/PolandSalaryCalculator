@@ -12,10 +12,15 @@ public class MainWithEnum {
 
         Menu menu = new Menu();
         JobTitleServiceImpl averageSalaryService = new JobTitleServiceImpl();
+        averageSalaryService.getAverageByJobTile(null);
         BigDecimal grossSalary = menu.userInput();
-        //averageSalaryService.save(grossSalary);
+        int i = averageSalaryService.save(grossSalary);
+        System.out.println(i);
         extracted(grossSalary);
         menu.checkAverage(grossSalary);
+        averageSalaryService.getAverageByJobTile(null);
+        averageSalaryService.updateJobTitle(i, "Software Engineer");
+
 
 
 

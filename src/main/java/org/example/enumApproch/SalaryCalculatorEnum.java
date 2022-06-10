@@ -27,7 +27,7 @@ public enum SalaryCalculatorEnum {
 
     NET(gross -> gross.subtract(TOTAL_ZUS.operator.apply(gross).add((TAX.operator.apply(gross)).add(HEALTH.operator.apply(gross)))).setScale(2, RoundingMode.HALF_EVEN), "Net amount: "),
     NET_YEARLY(gross -> NET.getOperator().apply(gross).multiply(BigDecimal.valueOf(12.)).setScale(2, RoundingMode.HALF_EVEN), "Yearly net amount: "),
-    MONTHLY_GROSS(gross -> gross.setScale(2, RoundingMode.HALF_EVEN), "Yearly gross amount: ");
+    MONTHLY_GROSS(gross -> gross.multiply(BigDecimal.valueOf(12)).setScale(2, RoundingMode.HALF_EVEN), "Yearly gross amount: ");
 
     private final UnaryOperator<BigDecimal> operator;
     private final String description;

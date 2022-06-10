@@ -19,4 +19,6 @@ private String jobTitle;
 private BigDecimal grossAverage;
 
 
+
+
 }

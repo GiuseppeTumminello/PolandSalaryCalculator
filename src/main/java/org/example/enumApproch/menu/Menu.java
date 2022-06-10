@@ -47,10 +47,6 @@ public class Menu {
                     int jobId;
                     do {
 
-                        for (var jobTitle : averageSalaryService.getJobTitles()){
-                            System.out.println("Enter " + jobTitle.getId() + " - for " + jobTitle.getJobTitle());
-                        }
-//
                         while (!scanner.hasNextInt()) {
                             System.out.println("That's not a valid number, please try again: ");
                             scanner.next();
