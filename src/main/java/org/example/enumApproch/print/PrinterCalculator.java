@@ -8,7 +8,6 @@ import org.example.enumApproch.SalaryCalculatorEnum;
 public class PrinterCalculator {
 
 
-
     public void printSalaryCalculatorTax(BigDecimal grossSalary) {
         for (var values : SalaryCalculatorEnum.values()) {
             System.out.print("\n" + values.getDescription());
@@ -24,6 +23,5 @@ public class PrinterCalculator {
             System.out.println("We do not have enough data to provide the average or the job title does not exist");
         }
     }
-
 
 }
