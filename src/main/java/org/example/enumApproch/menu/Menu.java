@@ -1,19 +1,20 @@
 package org.example.enumApproch.menu;
 
-import org.example.enumApproch.service.JobTitleServiceImpl;
-
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+
 public class Menu {
 
-    private final JobTitleServiceImpl averageSalaryService;
+
+    private final Scanner scanner;
+
 
     public Menu() {
-        this.averageSalaryService = new JobTitleServiceImpl();
+        this.scanner = new Scanner(System.in);
     }
 
-    public  BigDecimal userInput() {
+    public BigDecimal userInput() {
         BigDecimal grossSalary;
         Scanner scanner = new Scanner(System.in);
         do {
@@ -30,45 +31,38 @@ public class Menu {
         return grossSalary;
     }
 
-    public  void checkAverage(BigDecimal grossSalary) {
-
-
-        int choice;
-        Scanner scanner = new Scanner(System.in);
-        do {
-            System.out.println("\nPlease enter 1 - to check the average \nPlease enter 2 - to exit ");
-            while (!scanner.hasNextBigDecimal()) {
-                System.out.println("That's not a valid number, please try again: ");
-                scanner.next();
+    public String surveyInput() {
+        System.out.println("\nDo you want to participate to the statistic ?\nPlease type yes or no:");
+        String choice;
+        while (true) {
+            try {
+                choice = scanner.nextLine();
+                if (choice.trim().equalsIgnoreCase("yes")) {
+                    return jobTileValidator();
+                } else if (choice.trim().equalsIgnoreCase("no")) {
+                    System.out.println("Thank you for using Salary Calculator");
+                    return null;
+                } else {
+                    throw new IllegalArgumentException();
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Wrong input, please try again: ");
             }
-            choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    int jobId;
-                    do {
+        }
 
-                        while (!scanner.hasNextInt()) {
-                            System.out.println("That's not a valid number, please try again: ");
-                            scanner.next();
-                        }
-                        jobId = scanner.nextInt();
-
-
-                    } while (jobId > 5 || jobId < 1);
-                    BigDecimal averageSalary = averageSalaryService.getJobTitleById(jobId).getGrossAverage();
-                    if (averageSalary.compareTo(grossSalary.multiply(BigDecimal.valueOf(12))) < 0) {
-                        System.out.println("Your salary is greater than " + averageSalary + " yearly");
-                    } else {
-                        System.out.println("Your salary is less than " + averageSalary + " yearly");
-                    }
-                    break;
-                case 2:
-                    System.out.println("Thank you for using the salary calculator, bye!!");
-                    break;
-                default:
-                    System.out.println("Not a valid option");
-            }
-        } while (choice > 2 || choice <= 0);
     }
+
+    private String jobTileValidator() {
+        while (true) {
+            System.out.println("Please enter a job: ");
+            String jobTitle = scanner.nextLine().toLowerCase().replaceAll("[\\s-]", "_");
+            if (!jobTitle.matches("\\d+") && jobTitle.length() >= 4) {
+                return jobTitle;
+            } else {
+                System.out.println("The job title cannot be a number and has to be greater than or equal to four ");
+            }
+        }
+    }
+
 
 }

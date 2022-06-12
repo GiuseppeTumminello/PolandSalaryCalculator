@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+
 public class HikariCPDataSource {
+
     private final HikariDataSource dataSource;
 
     public HikariCPDataSource() {
@@ -30,6 +32,5 @@ public class HikariCPDataSource {
         }
 
     }
-
 
 }

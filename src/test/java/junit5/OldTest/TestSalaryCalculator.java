@@ -1,5 +1,11 @@
 package junit5.OldTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.math.BigDecimal;
+
 import org.example.oldWay.SalaryCalculator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,18 +14,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullSource;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.math.BigDecimal;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 
 class TestSalaryCalculator {
 
-    private SalaryCalculator salaryCalculator;
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor;
+    private SalaryCalculator salaryCalculator;
 
     public TestSalaryCalculator() {
         this.outputStreamCaptor = new ByteArrayOutputStream();
@@ -36,7 +36,6 @@ class TestSalaryCalculator {
     public void tearDown() {
         System.setOut(standardOut);
 
-
     }
 
     @ParameterizedTest
@@ -52,7 +51,7 @@ class TestSalaryCalculator {
     @CsvSource({"6000, 465.97", "7000, 543.63", "15891.68, 1234.16"})
     void getHealthNfzTotal(BigDecimal input, BigDecimal expected) {
         salaryCalculator = new SalaryCalculator(input);
-       //Assertions.assertEquals(expected, salaryCalculator.getHealthNfzTotal());
+        //Assertions.assertEquals(expected, salaryCalculator.getHealthNfzTotal());
         assertThat(salaryCalculator.getHealthNfzTotal()).isEqualTo(expected);
     }
 
@@ -79,7 +78,6 @@ class TestSalaryCalculator {
         salaryCalculator = new SalaryCalculator(input);
         //Assertions.assertEquals(expected, salaryCalculator.getZusPension());
         assertThat(salaryCalculator.getZusPension()).isEqualTo(expected);
-
 
     }
 
@@ -127,8 +125,10 @@ class TestSalaryCalculator {
     @NullSource
     void testNullCase(BigDecimal input) {
         salaryCalculator = new SalaryCalculator(input);
-        //Assertions.assertEquals("Null value or Value less than 2000.00 cannot be passed", outputStreamCaptor.toString().trim());
-        assertThat(outputStreamCaptor.toString().trim()).isEqualTo("Null value or Value less than 2000.00 cannot be passed");
+        //Assertions.assertEquals("Null value or Value less than 2000.00 cannot be passed", outputStreamCaptor
+        // .toString().trim());
+        assertThat(outputStreamCaptor.toString().trim()).isEqualTo(
+                "Null value or Value less than 2000.00 cannot be passed");
     }
 
 
@@ -136,32 +136,34 @@ class TestSalaryCalculator {
     @CsvSource({"-2000.5515158151522615", "-1.7976931348623157E308", "1999.99", "0"})
     void testLessThanTwoThousand(BigDecimal input) {
         salaryCalculator = new SalaryCalculator(input);
-        //Assertions.assertEquals("Null value or Value less than 2000.00 cannot be passed", outputStreamCaptor.toString().trim());
-        assertThat(outputStreamCaptor.toString().trim()).isEqualTo("Null value or Value less than 2000.00 cannot be passed");
+        //Assertions.assertEquals("Null value or Value less than 2000.00 cannot be passed", outputStreamCaptor
+        // .toString().trim());
+        assertThat(outputStreamCaptor.toString().trim()).isEqualTo(
+                "Null value or Value less than 2000.00 cannot be passed");
     }
 
     @Test
-    void  getZusPensionRate() {
+    void getZusPensionRate() {
         salaryCalculator = new SalaryCalculator(BigDecimal.valueOf(8000.0));
         assertThat(salaryCalculator.getZusPensionRate()).isEqualTo(9.76);
     }
+
     @Test
     public void getZusDisabilityRate() {
         salaryCalculator = new SalaryCalculator(BigDecimal.valueOf(8000.0));
         assertThat(salaryCalculator.getZusDisabilityRate()).isEqualTo(1.50);
     }
+
     @Test
     public void getZusSicknessRate() {
         salaryCalculator = new SalaryCalculator(BigDecimal.valueOf(8000.0));
         assertThat(salaryCalculator.getZusSicknessRate()).isEqualTo(2.45);
     }
+
     @Test
     public void getHealthNFZRate() {
         salaryCalculator = new SalaryCalculator(BigDecimal.valueOf(8000.0));
-         assertThat(salaryCalculator.getHealthNFZRate()).isEqualTo(9.0);
+        assertThat(salaryCalculator.getHealthNFZRate()).isEqualTo(9.0);
     }
-
-
-
 
 }

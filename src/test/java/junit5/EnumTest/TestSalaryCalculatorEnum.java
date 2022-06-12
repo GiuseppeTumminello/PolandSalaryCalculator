@@ -1,12 +1,12 @@
 package junit5.EnumTest;
 
-import org.example.enumApproch.SalaryCalculatorEnum;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.example.enumApproch.SalaryCalculatorEnum;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 
 class TestSalaryCalculatorEnum {
@@ -37,7 +37,6 @@ class TestSalaryCalculatorEnum {
     @CsvSource({"6000.,585.60", "7000, 683.20", "15891.68, 1551.03"})
     void getZusPension(BigDecimal input, BigDecimal expected) {
         assertThat(SalaryCalculatorEnum.PENSION_ZUS.getOperator().apply(input)).isEqualTo(expected);
-
 
     }
 
@@ -72,6 +71,5 @@ class TestSalaryCalculatorEnum {
     void getYearlyNet(BigDecimal input, BigDecimal expected) {
         assertThat(SalaryCalculatorEnum.NET_YEARLY.getOperator().apply(input)).isEqualTo(expected);
     }
-
 
 }
