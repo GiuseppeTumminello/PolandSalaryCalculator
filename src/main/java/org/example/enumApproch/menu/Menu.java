@@ -1,17 +1,22 @@
 package org.example.enumApproch.menu;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Scanner;
+
+import org.example.enumApproch.enums.JobFields;
+import org.example.enumApproch.print.PrinterCalculator;
 
 
 public class Menu {
 
-
     private final Scanner scanner;
-
+    private final PrinterCalculator printerCalculator;
 
     public Menu() {
         this.scanner = new Scanner(System.in);
+        this.printerCalculator = new PrinterCalculator();
+
     }
 
     public BigDecimal userInput() {
@@ -38,7 +43,8 @@ public class Menu {
             try {
                 choice = scanner.nextLine();
                 if (choice.trim().equalsIgnoreCase("yes")) {
-                    return jobTileValidator();
+                    printerCalculator.printJobFields();
+                    return jobFieldValidator();
                 } else if (choice.trim().equalsIgnoreCase("no")) {
                     System.out.println("Thank you for using Salary Calculator");
                     return null;
@@ -49,19 +55,47 @@ public class Menu {
                 System.out.println("Wrong input, please try again: ");
             }
         }
-
     }
 
-    private String jobTileValidator() {
+    private String jobFieldValidator() {
         while (true) {
-            System.out.println("Please enter a job: ");
-            String jobTitle = scanner.nextLine();
-            if (!jobTitle.matches("\\d+") && jobTitle.length() >= 4) {
-                return jobTitle.trim().toLowerCase().replaceAll("[\\s-]", "");
-            } else {
-                System.out.println("The job title cannot be a number and has to be greater than or equal to four ");
+            try {
+                System.out.println("Please enter a job field: ");
+                String jobField = scanner.nextLine();
+                return Arrays.stream(JobFields.values())
+                        .map(JobFields::getDescription)
+                        .filter(description -> description.equalsIgnoreCase(jobField.trim()))
+                        .findFirst()
+                        .orElseThrow(IllegalArgumentException::new);
+
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid job, please try again");
             }
         }
+    }
+
+    public String jobTitleValidator(String jobField){
+        while(true) {
+            try {
+                 System.out.println("Please enter a job title: ");
+                 String jobTitle = scanner.nextLine();
+                for (JobFields jobFields : JobFields.values()){
+                    if (jobFields.equals(JobFields.valueOf(jobField.toUpperCase()))) {
+                        for (var enumJobTitle : jobFields.getJobTitle()) {
+                            if (enumJobTitle.equalsIgnoreCase(jobTitle.trim())){
+                                return enumJobTitle;
+                            }
+                        }
+                    }
+                }
+                throw new IllegalArgumentException();
+
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid job, please try again");
+            }
+        }
+
+
     }
 
 }

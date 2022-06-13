@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import org.example.enumApproch.menu.Menu;
 import org.example.enumApproch.print.PrinterCalculator;
+import org.example.enumApproch.service.JobTitleService;
 import org.example.enumApproch.service.JobTitleServiceImpl;
 
 
@@ -13,16 +14,16 @@ public class MainWithEnum {
 
         Menu menu = new Menu();
         PrinterCalculator printerCalculator = new PrinterCalculator();
-        JobTitleServiceImpl averageSalaryService = new JobTitleServiceImpl();
-        BigDecimal grossSalary = menu.userInput();
-        int i = averageSalaryService.save(grossSalary);
-        printerCalculator.printSalaryCalculatorTax(grossSalary);
-        String jobTile = menu.surveyInput();
-        if (jobTile != null) {
-            averageSalaryService.updateJobTitle(i, jobTile);
-            BigDecimal average = averageSalaryService.getAverageByJobTile(jobTile);
-            printerCalculator.printAverage(average, grossSalary);
-        }
+        JobTitleService averageSalaryService = new JobTitleServiceImpl();
+        BigDecimal grossMonthlySalary = menu.userInput();
+        int i = averageSalaryService.save(grossMonthlySalary);
+        printerCalculator.printSalaryCalculatorTax(grossMonthlySalary);
+        String jobField = menu.surveyInput();
+        printerCalculator.printJobTitle(jobField);
+        String jobTitle = menu.jobTitleValidator(jobField);
+        averageSalaryService.updateJobTitle(i, jobTitle);
+        BigDecimal monthlyJobFieldAverage = averageSalaryService.getAverageByJobTile(jobTitle);
+        printerCalculator.printAverage(monthlyJobFieldAverage, grossMonthlySalary);
 
     }
 

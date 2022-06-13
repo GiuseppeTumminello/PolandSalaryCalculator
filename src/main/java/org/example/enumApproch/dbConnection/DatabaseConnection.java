@@ -8,11 +8,11 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 
-public class HikariCPDataSource {
+public class DatabaseConnection {
 
     private final HikariDataSource dataSource;
 
-    public HikariCPDataSource() {
+    public DatabaseConnection() {
         HikariConfig configuration = new HikariConfig();
         configuration.setJdbcUrl(DatabaseConfig.DATABASE_LOCAL_URL);
         configuration.setUsername(DatabaseConfig.USER);

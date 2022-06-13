@@ -6,18 +6,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.example.enumApproch.SalaryCalculatorEnum;
-import org.example.enumApproch.dbConnection.HikariCPDataSource;
+import org.example.enumApproch.enums.SalaryCalculatorEnum;
+import org.example.enumApproch.dbConnection.DatabaseConnection;
 
 
 public class JobTitleServiceImpl implements JobTitleService {
 
-    private final HikariCPDataSource hikariCPDataSource;
+    private final DatabaseConnection hikariCPDataSource;
     private final Connection connection;
 
 
     public JobTitleServiceImpl() {
-        this.hikariCPDataSource = new HikariCPDataSource();
+        this.hikariCPDataSource = new DatabaseConnection();
         this.connection = hikariCPDataSource.getConnection();
 
     }
@@ -30,9 +30,7 @@ public class JobTitleServiceImpl implements JobTitleService {
                     "pension_zus, disability_zus, sickness_zus, total_zus, health, gross_yearly, tax, net_monthly, " +
                     "net_early, gross_monthly) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id";
             preparedStatement = connection.prepareStatement(saveAllDataQuery);
-
             int count = 0;
-
             for (var value : SalaryCalculatorEnum.values()) {
                 count++;
                 preparedStatement.setBigDecimal(count, value.getOperator().apply(grossSalary));
@@ -70,11 +68,8 @@ public class JobTitleServiceImpl implements JobTitleService {
                     "UPDATE public.salary_calculator SET job_title=? where id=" + id);
             preparedStatement.setString(1, jobTitle);
             preparedStatement.execute();
-
         } catch (SQLException e) {
             e.printStackTrace();
-
         }
-
     }
 }
