@@ -20,7 +20,7 @@ public class Menu {
     }
 
     public BigDecimal userInput() {
-        BigDecimal grossSalary;
+        BigDecimal grossMonthlySalary;
         Scanner scanner = new Scanner(System.in);
         do {
             System.out.println("Please enter a gross amount greater or equal to 2000.00");
@@ -28,12 +28,12 @@ public class Menu {
                 System.out.println("That's not a valid number, please try again: ");
                 scanner.next();
             }
-            grossSalary = scanner.nextBigDecimal();
+            grossMonthlySalary = scanner.nextBigDecimal();
 
-        } while (grossSalary.compareTo(new BigDecimal("2000.00")) < 0);
+        } while (grossMonthlySalary.compareTo(new BigDecimal("2000.00")) < 0);
 
 
-        return grossSalary;
+        return grossMonthlySalary;
     }
 
     public String surveyInput() {

@@ -19,11 +19,13 @@ public class MainWithEnum {
         int i = averageSalaryService.save(grossMonthlySalary);
         printerCalculator.printSalaryCalculatorTax(grossMonthlySalary);
         String jobField = menu.surveyInput();
-        printerCalculator.printJobTitle(jobField);
-        String jobTitle = menu.jobTitleValidator(jobField);
-        averageSalaryService.updateJobTitle(i, jobTitle);
-        BigDecimal monthlyJobFieldAverage = averageSalaryService.getAverageByJobTile(jobTitle);
-        printerCalculator.printAverage(monthlyJobFieldAverage, grossMonthlySalary);
+        if (jobField != null) {
+            printerCalculator.printJobTitle(jobField);
+            String jobTitle = menu.jobTitleValidator(jobField);
+            averageSalaryService.updateJobTitle(i, jobTitle);
+            BigDecimal monthlyJobFieldAverage = averageSalaryService.getAverageByJobTile(jobTitle);
+            printerCalculator.printAverage(monthlyJobFieldAverage, grossMonthlySalary);
+        }
 
     }
 
