@@ -6,8 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.example.enumApproch.enums.SalaryCalculatorEnum;
 import org.example.enumApproch.dbConnection.DatabaseConnection;
+import org.example.enumApproch.enums.SalaryCalculatorEnum;
 
 
 public class JobTitleServiceImpl implements JobTitleService {

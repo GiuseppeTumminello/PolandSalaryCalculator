@@ -14,12 +14,11 @@ public enum JobFields {
 
     IT(1, "It", new ArrayList<>(List.of("DevOps Engineer", "Software Developer", "Software Engineer"))),
     FINANCE(2, "Finance", new ArrayList<>(List.of("Fund Accountant", "Depositary"))),
-    ENGINEER(3, "Engineer",new ArrayList<>(List.of("Mechanic Engineer", "Civil Engineer")));
+    ENGINEER(3, "Engineer", new ArrayList<>(List.of("Mechanic Engineer", "Civil Engineer")));
 
 
     private final int jobId;
     private final String Description;
     private final List<String> jobTitle;
-
 
 }

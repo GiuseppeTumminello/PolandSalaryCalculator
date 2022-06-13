@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.function.UnaryOperator;
 
-import org.example.enumApproch.enums.Rates;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -44,11 +42,9 @@ public enum SalaryCalculatorEnum {
     }, "Tax amount: "),
 
 
-    NET(
-            gross -> gross.subtract(TOTAL_ZUS.operator.apply(gross)
-                            .add((TAX.operator.apply(gross)).add(HEALTH.operator.apply(gross))))
-                    .setScale(2, RoundingMode.HALF_EVEN),
-            "Net amount: "),
+    NET(gross -> gross.subtract(TOTAL_ZUS.operator.apply(gross)
+                    .add((TAX.operator.apply(gross)).add(HEALTH.operator.apply(gross))))
+            .setScale(2, RoundingMode.HALF_EVEN), "Net amount: "),
     NET_YEARLY(gross -> NET.getOperator()
             .apply(gross)
             .multiply(BigDecimal.valueOf(Rates.MONTH_NUMBER.getRate()))

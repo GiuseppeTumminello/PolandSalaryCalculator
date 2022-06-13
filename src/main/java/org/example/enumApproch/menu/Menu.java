@@ -74,15 +74,15 @@ public class Menu {
         }
     }
 
-    public String jobTitleValidator(String jobField){
-        while(true) {
+    public String jobTitleValidator(String jobField) {
+        while (true) {
             try {
-                 System.out.println("Please enter a job title: ");
-                 String jobTitle = scanner.nextLine();
-                for (JobFields jobFields : JobFields.values()){
+                System.out.println("Please enter a job title: ");
+                String jobTitle = scanner.nextLine();
+                for (JobFields jobFields : JobFields.values()) {
                     if (jobFields.equals(JobFields.valueOf(jobField.toUpperCase()))) {
                         for (var enumJobTitle : jobFields.getJobTitle()) {
-                            if (enumJobTitle.equalsIgnoreCase(jobTitle.trim())){
+                            if (enumJobTitle.equalsIgnoreCase(jobTitle.trim())) {
                                 return enumJobTitle;
                             }
                         }
@@ -94,7 +94,6 @@ public class Menu {
                 System.out.println("Invalid job, please try again");
             }
         }
-
 
     }
 
