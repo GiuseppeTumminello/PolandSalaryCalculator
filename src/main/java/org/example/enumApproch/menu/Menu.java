@@ -55,9 +55,9 @@ public class Menu {
     private String jobTileValidator() {
         while (true) {
             System.out.println("Please enter a job: ");
-            String jobTitle = scanner.nextLine().toLowerCase().replaceAll("[\\s-]", "_");
+            String jobTitle = scanner.nextLine();
             if (!jobTitle.matches("\\d+") && jobTitle.length() >= 4) {
-                return jobTitle;
+                return jobTitle.trim().toLowerCase().replaceAll("[\\s-]", "");
             } else {
                 System.out.println("The job title cannot be a number and has to be greater than or equal to four ");
             }

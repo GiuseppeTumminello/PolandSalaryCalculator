@@ -1,6 +1,7 @@
 package org.example.enumApproch.print;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.example.enumApproch.SalaryCalculatorEnum;
 
@@ -16,9 +17,13 @@ public class PrinterCalculator {
     }
 
 
-    public void printAverage(BigDecimal average) {
+    public void printAverage(BigDecimal average, BigDecimal grossSalary) {
         if (average != null) {
-            System.out.println("Average is: " + average);
+            if (average.compareTo(grossSalary.multiply(BigDecimal.valueOf(12))) < 0){
+                System.out.println("The monthly average is " + average.setScale(2, RoundingMode.HALF_EVEN) + " and your monthly average is " + grossSalary + " and is below of the average");
+            }
+            System.out.println("The monthly average is " + average.setScale(2, RoundingMode.HALF_EVEN) + " and your monthly average is " + grossSalary + " and is above of the average");
+
         } else {
             System.out.println("We do not have enough data to provide the average or the job title does not exist");
         }

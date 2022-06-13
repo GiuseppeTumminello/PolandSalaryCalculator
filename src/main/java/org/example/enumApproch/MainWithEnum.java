@@ -19,9 +19,9 @@ public class MainWithEnum {
         printerCalculator.printSalaryCalculatorTax(grossSalary);
         String jobTile = menu.surveyInput();
         if (jobTile != null) {
-            BigDecimal average = averageSalaryService.getAverageByJobTile(jobTile);
             averageSalaryService.updateJobTitle(i, jobTile);
-            printerCalculator.printAverage(average);
+            BigDecimal average = averageSalaryService.getAverageByJobTile(jobTile);
+            printerCalculator.printAverage(average, grossSalary);
         }
 
     }

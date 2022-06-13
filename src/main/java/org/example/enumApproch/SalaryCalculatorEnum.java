@@ -51,8 +51,8 @@ public enum SalaryCalculatorEnum {
             .apply(gross)
             .multiply(BigDecimal.valueOf(12.))
             .setScale(2, RoundingMode.HALF_EVEN), "Yearly net amount: "),
-    MONTHLY_GROSS(gross -> gross.multiply(BigDecimal.valueOf(12)).setScale(2, RoundingMode.HALF_EVEN),
-            "Yearly gross amount: ");
+    MONTHLY_GROSS(gross -> gross.setScale(2, RoundingMode.HALF_EVEN),
+            "Monthly gross amount: ");
 
     private final UnaryOperator<BigDecimal> operator;
     private final String description;
