@@ -3,6 +3,7 @@ package org.example.enumApproch.print;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.example.enumApproch.enums.JobFields;
 import org.example.enumApproch.enums.Rates;
@@ -13,10 +14,9 @@ public class PrinterCalculator {
 
 
     public void printSalaryCalculatorTax(BigDecimal grossSalary) {
-        for (var values : SalaryCalculatorEnum.values()) {
-            System.out.print("\n" + values.getDescription());
-            System.out.print(values.getOperator().apply(grossSalary));
-        }
+        Arrays.stream(SalaryCalculatorEnum.values())
+                .forEach(values -> System.out.print(
+                        "\n" + values.getDescription() + values.getOperator().apply(grossSalary)));
     }
 
 
@@ -35,7 +35,6 @@ public class PrinterCalculator {
         }
     }
 
-
     public void printJobFields() {
         Arrays.stream(JobFields.values())
                 .forEach(jobField -> System.out.println(jobField.getJobId() + " - " + jobField.getDescription()));
@@ -43,16 +42,11 @@ public class PrinterCalculator {
     }
 
     public void printJobTitle(String jobField) {
-        int count = 1;
-        for (var jobFields : JobFields.values()) {
-            if (jobFields.equals(JobFields.valueOf(jobField.toUpperCase()))) {
-
-                for (var jobTitle : jobFields.getJobTitle()) {
-                    System.out.println(count++ + " - " + jobTitle);
-                }
-            }
-
-        }
+        final AtomicInteger count = new AtomicInteger(1);
+        Arrays.stream(JobFields.values())
+                .filter(jobFields -> jobFields.equals(JobFields.valueOf(jobField.toUpperCase())))
+                .forEach(jobTitle -> jobTitle.getJobTitle()
+                        .forEach(x -> System.out.println(count.getAndIncrement() + " - " + x)));
 
     }
 

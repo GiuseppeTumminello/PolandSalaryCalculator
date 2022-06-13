@@ -88,6 +88,7 @@ public class Menu {
                         }
                     }
                 }
+
                 throw new IllegalArgumentException();
 
             } catch (IllegalArgumentException e) {
