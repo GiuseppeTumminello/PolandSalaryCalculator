@@ -64,7 +64,7 @@ Create a table in PostgreSQL by executing the create table query.
 
 CREATE TABLE IF NOT EXISTS public.salary_calculator ( id integer NOT NULL DEFAULT nextval('salary_calculator_id_seq'::regclass), pension_zus numeric, disability_zus numeric, sickness_zus numeric, total_zus numeric, health numeric, gross_yearly numeric, tax numeric, net_monthly numeric, net_yearly numeric, gross_monthly numeric, job_title character varying COLLATE pg_catalog."default", CONSTRAINT salary_calculator_pkey PRIMARY KEY (id) )
 
-How to run?
+# How to run?
 
 Clone the git repository, open the project with your favorite IDE, go to the DatabaseConfig class, and update the following fields according to your setup:
 
