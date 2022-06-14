@@ -109,6 +109,10 @@ The application uses Postgres SQL Server, which runs in a Docker container. Plea
 * Docker container PgAdmin4: 
   * docker pull dpage/pgadmin4
   * docker run --name my-own-postgres -e POSTGRES_PASSWORD=postgresmaster -p 5432:5432 -d postgres
+  
+* Docker compose file: docker-compose-pgadmin4.yml
+  * Go to the folder: /PolandSalaryCalculator/src/main/resources/docker/dockercompose
+  * execute: docker-compose -f docker-compose-pgadmin4.yml up
 
 * Create a table in PostgreSQL by executing the create table query.
 
