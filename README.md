@@ -69,7 +69,7 @@ The input can be either lower case or uppercase. If the input does not match the
   * Dishwasher
   * Waitress
   
- * Arline
+* Arline
   * Air Crew
   * Airline Captain
   * Airline Pilot
