@@ -1,6 +1,6 @@
 # PolandSalaryCalculator
 
-The application has been created to calculate the salary net amount in pln and display all the taxation applied to the gross amount. The application will display the following fields:
+The application has been created to calculate net amount in pln and display all the taxation applied to the gross amount. The application will ask to the user to type an amount greater or equal to two thousand and it will display the following information:
 
 * Pension Zus amount
 * Disability zus amount
@@ -110,9 +110,9 @@ The application uses Postgres SQL Server, which runs in a Docker container. Plea
   * docker pull dpage/pgadmin4
   * docker run --name my-own-postgres -e POSTGRES_PASSWORD=postgresmaster -p 5432:5432 -d postgres
 
-Create a table in PostgreSQL by executing the create table query.
+* Create a table in PostgreSQL by executing the create table query.
 
-CREATE TABLE IF NOT EXISTS public.salary_calculator ( id integer NOT NULL DEFAULT nextval('salary_calculator_id_seq'::regclass), pension_zus numeric, disability_zus numeric, sickness_zus numeric, total_zus numeric, health numeric, gross_yearly numeric, tax numeric, net_monthly numeric, net_yearly numeric, gross_monthly numeric, job_title character varying COLLATE pg_catalog."default", CONSTRAINT salary_calculator_pkey PRIMARY KEY (id) )
+  * CREATE TABLE IF NOT EXISTS public.salary_calculator ( id integer NOT NULL DEFAULT nextval('salary_calculator_id_seq'::regclass), pension_zus numeric, disability_zus numeric, sickness_zus numeric, total_zus numeric, health numeric, gross_yearly numeric, tax numeric, net_monthly numeric, net_yearly numeric, gross_monthly numeric, job_title character varying COLLATE pg_catalog."default", CONSTRAINT salary_calculator_pkey PRIMARY KEY (id) )
 
 # How to run?
 
