@@ -3,9 +3,16 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <artifactId>SalaryCalculator</artifactId>
-
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.0.0-M7</version>
+      </plugin>
+    </plugins>
+  </build>
   <dependencies>
-
     <dependency>
       <artifactId>junit-jupiter-params</artifactId>
       <groupId>org.junit.jupiter</groupId>
@@ -22,29 +29,19 @@
       <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
       <scope>provided</scope>
-      <version>1.18.10</version>
+      <version>1.18.24</version>
     </dependency>
     <dependency>
       <artifactId>postgresql</artifactId>
       <groupId>org.postgresql</groupId>
-      <version>42.3.3</version>
+      <version>42.3.6</version>
     </dependency>
   </dependencies>
-  <groupId>org.example</groupId>
+  <groupId>com.acoustic</groupId>
   <modelVersion>4.0.0</modelVersion>
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
   </properties>
   <version>1.0-SNAPSHOT</version>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M7</version>
-      </plugin>
-    </plugins>
-  </build>
-
 </project>
