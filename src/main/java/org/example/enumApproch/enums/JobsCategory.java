@@ -10,7 +10,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum JobFields {
+public enum JobsCategory {
 
     IT(1, "It", new ArrayList<>(List.of("DevOps Engineer", "Software Developer", "Software Engineer"))),
     FINANCE(2, "Finance", new ArrayList<>(List.of("Fund Accountant", "Depositary"))),
