@@ -93,8 +93,13 @@ The application uses Postgres SQL Server, which runs in a Docker container. Plea
 
 * Docker container postgress:
   * docker pull postgres
-  * docker run -p 5432:5432
--d \-e POSTGRES_PASSWORD=yourpassword-e POSTGRES_USER=youruser-e POSTGRES_DB=stripe-example-v pgdata:/var/lib/postgresql/datapostgres
+  * docker docker run -p 5432:5432 -d \                                              
+    -e POSTGRES_PASSWORD=password \
+    -e POSTGRES_USER=postgres \
+    -e POSTGRES_DB=stripe-example \
+    -v pgdata:/var/lib/postgresql/data \
+    postgres
+
 
 
 * Docker container PgAdmin4: 
