@@ -88,6 +88,7 @@ public class MenuSalaryCalculator {
                         }
                     }
                 }
+
                 throw new IllegalArgumentException();
 
             } catch (IllegalArgumentException e) {

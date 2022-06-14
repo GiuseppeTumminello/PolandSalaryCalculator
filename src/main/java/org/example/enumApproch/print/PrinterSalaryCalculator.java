@@ -34,7 +34,6 @@ public class PrinterSalaryCalculator {
         }
     }
 
-
     public void printJobFields() {
         Arrays.stream(JobsCategory.values())
                 .forEach(jobField -> System.out.println(jobField.getJobId() + " - " + jobField.getDescription()));
@@ -43,10 +42,17 @@ public class PrinterSalaryCalculator {
 
     public void printJobTitle(String jobField) {
         final AtomicInteger count = new AtomicInteger(1);
+<<<<<<< HEAD:src/main/java/org/example/enumApproch/print/PrinterSalaryCalculator.java
         Arrays.stream(JobsCategory.values())
                 .filter(jobFields -> jobFields.equals(JobsCategory.valueOf(jobField.toUpperCase())))
                 .forEach(jobTitle -> jobTitle.getJobTitle()
                         .forEach(result -> System.out.println(count.getAndIncrement() + " - " + result)));
+=======
+        Arrays.stream(JobFields.values())
+                .filter(jobFields -> jobFields.equals(JobFields.valueOf(jobField.toUpperCase())))
+                .forEach(jobTitle -> jobTitle.getJobTitle()
+                        .forEach(x -> System.out.println(count.getAndIncrement() + " - " + x)));
+>>>>>>> d0006b8a8037e8b57950c27abb8e298412f14b26:src/main/java/org/example/enumApproch/print/PrinterCalculator.java
 
     }
 
