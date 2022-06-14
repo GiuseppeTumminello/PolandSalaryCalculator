@@ -12,7 +12,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum SalaryCalculator {
-
     PENSION_ZUS(gross -> gross.multiply(BigDecimal.valueOf(Rates.PENSION_ZUS_RATE.getRate()))
             .setScale(2, RoundingMode.HALF_EVEN), "Pension Zus amount: "),
     DISABILITY_ZUS(gross -> gross.multiply(BigDecimal.valueOf(Rates.DISABILITY_ZUS_RATE.getRate()))
