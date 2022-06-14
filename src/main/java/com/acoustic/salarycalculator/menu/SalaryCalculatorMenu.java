@@ -20,6 +20,7 @@ public class SalaryCalculatorMenu {
     }
 
     public BigDecimal userInput() {
+        Scanner scanner = new Scanner(System.in);
         BigDecimal grossMonthlySalary;
         do {
             System.out.println("Please enter a gross amount greater or equal to 2000.00");

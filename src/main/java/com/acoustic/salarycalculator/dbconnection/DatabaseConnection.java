@@ -1,36 +1,28 @@
 package com.acoustic.salarycalculator.dbconnection;
 
-
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
+import java.util.Properties;
 
 
 public class DatabaseConnection {
 
-    private final HikariDataSource dataSource;
+    private final Properties properties;
 
     public DatabaseConnection() {
-        HikariConfig configuration = new HikariConfig();
-        configuration.setJdbcUrl(DatabaseConfig.DATABASE_LOCAL_URL);
-        configuration.setUsername(DatabaseConfig.USER);
-        configuration.setPassword(DatabaseConfig.PASSWORD);
-        configuration.addDataSourceProperty("cachePrepStmts", "true");
-        configuration.addDataSourceProperty("prepStmtCacheSize", "250");
-        configuration.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-        dataSource = new HikariDataSource(configuration);
+        this.properties = new Properties();
     }
-
 
     public Connection getConnection() {
         try {
-            return dataSource.getConnection();
+            properties.setProperty("user", DatabaseConfig.USER);
+            properties.setProperty("password", DatabaseConfig.PASSWORD);
+
+            return DriverManager.getConnection(DatabaseConfig.DATABASE_LOCAL_URL, properties);
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
-
 }

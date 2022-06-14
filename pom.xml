@@ -19,12 +19,6 @@
       <version>5.8.2</version>
     </dependency>
     <dependency>
-      <artifactId>testng</artifactId>
-      <groupId>org.testng</groupId>
-      <scope>test</scope>
-      <version>RELEASE</version>
-    </dependency>
-    <dependency>
       <artifactId>junit</artifactId>
       <groupId>junit</groupId>
       <scope>test</scope>

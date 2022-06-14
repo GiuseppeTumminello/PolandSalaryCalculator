@@ -12,13 +12,13 @@ import com.acoustic.salarycalculator.dbconnection.DatabaseConnection;
 
 public class JobTitleServiceImpl implements JobTitleService {
 
-    private final DatabaseConnection hikariCPDataSource;
+    private final DatabaseConnection databaseConnection;
     private final Connection connection;
 
 
     public JobTitleServiceImpl() {
-        this.hikariCPDataSource = new DatabaseConnection();
-        this.connection = hikariCPDataSource.getConnection();
+        this.databaseConnection = new DatabaseConnection();
+        this.connection = databaseConnection.getConnection();
 
     }
 

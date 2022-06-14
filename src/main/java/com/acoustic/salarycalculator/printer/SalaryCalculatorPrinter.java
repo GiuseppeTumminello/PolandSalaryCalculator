@@ -22,17 +22,20 @@ public class SalaryCalculatorPrinter {
     public void printAverage(BigDecimal monthlyAverage, BigDecimal grossMonthlySalary) {
         if (monthlyAverage != null) {
             if (monthlyAverage.compareTo(grossMonthlySalary) > 0) {
-                System.out.println("The monthly gross average is " + monthlyAverage.setScale(2, RoundingMode.HALF_EVEN) +
-                        " and your monthly gross is " + grossMonthlySalary.setScale(2, RoundingMode.HALF_EVEN) +
-                        " and it is below of the threshold");
+                System.out.println(
+                        "The monthly gross average is " + monthlyAverage.setScale(2, RoundingMode.HALF_EVEN) +
+                                " and your monthly gross is " + grossMonthlySalary.setScale(2, RoundingMode.HALF_EVEN) +
+                                " and it is below of the threshold");
             } else if (monthlyAverage.compareTo(grossMonthlySalary) == 0) {
-                System.out.println("The monthly gross average is " + monthlyAverage.setScale(2, RoundingMode.HALF_EVEN) +
-                        " and your monthly gross is " + grossMonthlySalary.setScale(2, RoundingMode.HALF_EVEN) +
-                        " and it is equal to the threshold");
+                System.out.println(
+                        "The monthly gross average is " + monthlyAverage.setScale(2, RoundingMode.HALF_EVEN) +
+                                " and your monthly gross is " + grossMonthlySalary.setScale(2, RoundingMode.HALF_EVEN) +
+                                " and it is equal to the threshold");
             } else {
-                System.out.println("The monthly gross average is " + monthlyAverage.setScale(2, RoundingMode.HALF_EVEN) +
-                        " and your monthly gross is " + grossMonthlySalary.setScale(2, RoundingMode.HALF_EVEN) +
-                        " and it is above of the threshold");
+                System.out.println(
+                        "The monthly gross average is " + monthlyAverage.setScale(2, RoundingMode.HALF_EVEN) +
+                                " and your monthly gross is " + grossMonthlySalary.setScale(2, RoundingMode.HALF_EVEN) +
+                                " and it is above of the threshold");
             }
 
         }
