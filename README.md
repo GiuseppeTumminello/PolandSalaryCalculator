@@ -56,7 +56,7 @@ The input can be either lower case or uppercase. If the input does not match the
   * R&D Engineer
   * Thermal Engineer 
   
- * Restaurant
+* Restaurant
   * Executive Chef
   * Assistant Manager
   * General Manager
@@ -68,7 +68,7 @@ The input can be either lower case or uppercase. If the input does not match the
   * Cashier
   * Dishwasher
   * Waitress
-  * 
+  
  * Arline
   * Air Crew
   * Airline Captain
