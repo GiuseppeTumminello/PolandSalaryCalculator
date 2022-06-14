@@ -18,6 +18,8 @@ The application will also ask if the user would like to participate in the stati
 * It
 * Finance
 * Engineer
+* Restaurant
+* Airline
 
 The input can be either lower case or uppercase. If the input does not match the list, it will be asked to try again. Else, the user has to provide one of the following job titles according to the job field chosen previously:
 
@@ -25,13 +27,56 @@ The input can be either lower case or uppercase. If the input does not match the
   * DevOps Engineer
   * Software Developer
   * Software Engineer
+  * Cloud System Engineer
+  * Cloud Architect
+  * IT Analyst
+  * Network Engineer
+  * IT Support Specialist
+  * Database Administrator
+  * System Architect
+  * Web Administrator
+ 
 * Finance:
   * Fund Accountant
   * Depositary
-  * EngineerMechanic EngineerCivil Engineer
+  * Accountant
+  * Tax Analyst
+  * Auditor
+  * Risk Analyst
+  * Business Analyst
+  * Billing Administrator
+  * Financial Controller
+ 
 * Engineer:
   * Mechanical Engineer 
   * Civil Engineer
+  * Project Engineer
+  * Project Engineer
+  * Sales Engineer
+  * R&D Engineer
+  * Thermal Engineer 
+  
+ * Restaurant
+  * Executive Chef
+  * Assistant Manager
+  * General Manager
+  * Sous Chef
+  * Pastry Chef
+  * Kitchen Manager
+  * Line Cook
+  * Bartender
+  * Cashier
+  * Dishwasher
+  * Waitress
+  * 
+ * Arline
+  * Air Crew
+  * Airline Captain
+  * Airline Pilot
+  * Airport Manager
+  * Analyst
+  * Chief Pilot
+  * Traffic Manager
  
 
 The application will display if the salary gross amount is above or below the gross salary average.
