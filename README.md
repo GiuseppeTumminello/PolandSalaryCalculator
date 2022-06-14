@@ -91,7 +91,7 @@ The application will display if the salary gross amount is above or below the gr
 
 The application uses Postgres SQL Server, which runs in a Docker container. Please execute the following command to create the containers for Postgres SQL and PgAdmin4
 
-* Docker container postgress:
+* Docker container postgress command line:
   * docker pull postgres
   * docker docker run -p 5432:5432 -d \                                              
     -e POSTGRES_PASSWORD=password \
@@ -99,6 +99,10 @@ The application uses Postgres SQL Server, which runs in a Docker container. Plea
     -e POSTGRES_DB=stripe-example \
     -v pgdata:/var/lib/postgresql/data \
     postgres
+  
+ * Docker compose file: docker-compose-pg.yml
+  * Go to the folder: /PolandSalaryCalculator/src/main/resources/docker/dockercompose
+  * execute: docker-compose -f docker-compose-pg.yml up
 
 
 
