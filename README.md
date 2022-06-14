@@ -100,7 +100,7 @@ The application uses Postgres SQL Server, which runs in a Docker container. Plea
     -v pgdata:/var/lib/postgresql/data \
     postgres
   
- * Docker compose file: docker-compose-pg.yml
+* Docker compose file: docker-compose-pg.yml
   * Go to the folder: /PolandSalaryCalculator/src/main/resources/docker/dockercompose
   * execute: docker-compose -f docker-compose-pg.yml up
 
