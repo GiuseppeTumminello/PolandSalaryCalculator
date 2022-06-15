@@ -23,7 +23,7 @@ public class DatabaseConnection {
 
             connection = DriverManager.getConnection(DatabaseConfig.DATABASE_LOCAL_URL, properties);
 
-        } catch (SQLException e) {
+        } catch (SQLException exception) {
             System.out.println("Connection to the database failed, please check your setup");
         }
         return connection;

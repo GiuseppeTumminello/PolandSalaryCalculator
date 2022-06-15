@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.function.UnaryOperator;
 
+import com.acoustic.salarycalculator.jobscategories.JobsCategory;
 import com.acoustic.salarycalculator.rates.Rates;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,11 +29,9 @@ public enum SalaryCalculator {
     TAX(getTaxAmount(), "Tax amount: "),
 
 
-    NET(
-            gross -> gross.subtract(TOTAL_ZUS.operator.apply(gross)
-                            .add((TAX.operator.apply(gross)).add(HEALTH.operator.apply(gross))))
-                    .setScale(2, RoundingMode.HALF_EVEN),
-            "Net amount: "),
+    NET(gross -> gross.subtract(TOTAL_ZUS.operator.apply(gross)
+                    .add((TAX.operator.apply(gross)).add(HEALTH.operator.apply(gross))))
+            .setScale(2, RoundingMode.HALF_EVEN), "Net amount: "),
     NET_YEARLY(gross -> NET.getOperator()
             .apply(gross)
             .multiply(BigDecimal.valueOf(Rates.MONTH_NUMBER.getRate()))
@@ -56,6 +55,7 @@ public enum SalaryCalculator {
                         .subtract(HEALTH.getOperator().apply(gross))
                         .multiply(BigDecimal.valueOf(Rates.TAX_RATE_32.getRate()))
                         .setScale(2, RoundingMode.HALF_EVEN);
+
             }
         };
     }

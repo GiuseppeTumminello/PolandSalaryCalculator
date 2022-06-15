@@ -40,7 +40,7 @@ public class SalaryCalculatorMenu {
         String choice;
         choice = scanner.nextLine();
         if (choice.trim().equalsIgnoreCase("yes") || choice.trim().equalsIgnoreCase("y")) {
-            printerCalculator.printJobFields();
+            printerCalculator.printJobDepartment();
             return jobDepartmentValidator();
         } else {
             System.out.println("Thank you for using salary calculator");

@@ -31,7 +31,6 @@ public class SalaryCalculatorApplication {
     private BigDecimal salaryCalculator() {
         BigDecimal grossMonthlySalary = menu.userInput();
         printerCalculator.printSalaryCalculatorTax(grossMonthlySalary);
-        survey(grossMonthlySalary);
         return grossMonthlySalary;
     }
 

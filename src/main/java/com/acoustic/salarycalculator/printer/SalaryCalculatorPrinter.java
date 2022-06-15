@@ -39,7 +39,7 @@ public class SalaryCalculatorPrinter {
     }
 
 
-    public void printJobFields() {
+    public void printJobDepartment() {
         Arrays.stream(JobsCategory.values())
                 .forEach(jobDepartment -> System.out.println(
                         jobDepartment.getJobId() + " - " + jobDepartment.getDescription()));
@@ -56,7 +56,7 @@ public class SalaryCalculatorPrinter {
                     .entrySet()
                     .stream()
                     .sorted(Map.Entry.comparingByKey())
-                    .forEach(x -> System.out.println(x.getKey() + " - " + x.getValue()));
+                    .forEach(mapValues -> System.out.println(mapValues.getKey() + " - " + mapValues.getValue()));
         } catch (IllegalArgumentException e) {
             System.out.println("No job title available in the Job Category");
         }
