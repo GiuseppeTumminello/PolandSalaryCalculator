@@ -1,4 +1,4 @@
-package com.acoustic.salarycalculator.menu;
+package com.acoustic.salarycalculator.inputvalidation;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -10,12 +10,12 @@ import com.acoustic.salarycalculator.printer.SalaryCalculatorPrinter;
 import com.acoustic.salarycalculator.rates.Rates;
 
 
-public class SalaryCalculatorMenu {
+public class SalaryCalculatorInputValidation {
 
     private final Scanner scanner;
     private final SalaryCalculatorPrinter printerCalculator;
 
-    public SalaryCalculatorMenu() {
+    public SalaryCalculatorInputValidation() {
         this.printerCalculator = new SalaryCalculatorPrinter();
         this.scanner = new Scanner(System.in);
     }
@@ -53,11 +53,12 @@ public class SalaryCalculatorMenu {
             try {
                 System.out.println("Please enter the job department id: ");
                 int jobDepartmentId = scanner.nextInt();
-                return Arrays.stream(JobsCategory.values())
-                        .map(JobsCategory::getJobId)
-                        .filter(jobCategoryId -> jobCategoryId == jobDepartmentId)
-                        .findFirst()
-                        .orElseThrow(IllegalArgumentException::new);
+                 return Arrays.stream(JobsCategory.values())
+                         .map(JobsCategory::getJobId)
+                         .filter(jobCategoryId -> jobCategoryId == jobDepartmentId)
+                         .findFirst()
+                         .orElseThrow(IllegalArgumentException::new);
+
             } catch (IllegalArgumentException | InputMismatchException | NullPointerException exception) {
                 System.out.println("Invalid job department id, please try again");
                 scanner.nextLine();
@@ -79,7 +80,7 @@ public class SalaryCalculatorMenu {
                         .getJobTitle()
                         .get(jobTitleId);
 
-            } catch (IllegalArgumentException | InputMismatchException | NullPointerException e) {
+            } catch (IllegalArgumentException | InputMismatchException | NullPointerException exception) {
                 System.out.println("Invalid job title id, please try again");
                 scanner.nextLine();
             }

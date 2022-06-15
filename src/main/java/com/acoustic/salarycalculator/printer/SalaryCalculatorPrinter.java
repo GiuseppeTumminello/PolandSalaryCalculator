@@ -57,7 +57,7 @@ public class SalaryCalculatorPrinter {
                     .stream()
                     .sorted(Map.Entry.comparingByKey())
                     .forEach(mapValues -> System.out.println(mapValues.getKey() + " - " + mapValues.getValue()));
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException exception) {
             System.out.println("No job title available in the Job Category");
         }
 

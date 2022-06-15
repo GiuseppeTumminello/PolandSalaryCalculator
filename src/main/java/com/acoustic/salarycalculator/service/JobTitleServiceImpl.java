@@ -14,6 +14,7 @@ public class JobTitleServiceImpl implements JobTitleService {
 
     private final DatabaseConnection databaseConnection;
 
+
     public JobTitleServiceImpl() {
         this.databaseConnection = new DatabaseConnection();
 
