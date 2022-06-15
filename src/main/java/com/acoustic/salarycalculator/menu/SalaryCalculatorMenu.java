@@ -30,6 +30,7 @@ public class SalaryCalculatorMenu {
             }
             grossMonthlySalary = scanner.nextBigDecimal();
 
+
         } while (grossMonthlySalary.compareTo(new BigDecimal("2000.00")) < 0);
 
 

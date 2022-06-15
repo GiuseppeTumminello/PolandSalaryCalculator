@@ -2,8 +2,9 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>SalaryCalculator</artifactId>
 
+
+  <artifactId>SalaryCalculator</artifactId>
   <build>
     <plugins>
       <plugin>
@@ -13,6 +14,7 @@
       </plugin>
     </plugins>
   </build>
+
   <dependencies>
     <dependency>
       <artifactId>junit-jupiter-params</artifactId>
@@ -38,11 +40,12 @@
       <version>42.3.6</version>
     </dependency>
   </dependencies>
-  <groupId>org.example</groupId>
+  <groupId>com.acoustic</groupId>
   <modelVersion>4.0.0</modelVersion>
+  <name>poland-salary-calculator</name>
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
   </properties>
-  <version>1.0-SNAPSHOT</version>
+  <version>2.0-develop-SNAPSHOT</version>
 </project>
