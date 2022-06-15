@@ -25,21 +25,7 @@ public enum SalaryCalculator {
             .setScale(2, RoundingMode.HALF_EVEN), "Health amount: "),
     GROSS_YEARLY(gross -> gross.multiply(BigDecimal.valueOf(Rates.MONTH_NUMBER.getRate()))
             .setScale(2, RoundingMode.HALF_EVEN), "Yearly gross amount: "),
-    TAX(gross -> {
-        if (GROSS_YEARLY.getOperator()
-                .apply(gross)
-                .compareTo(BigDecimal.valueOf(Rates.TAX_GROSS_AMOUNT_TRASHOLD.getRate())) < 0) {
-            return gross.subtract(TOTAL_ZUS.getOperator().apply(gross))
-                    .subtract(HEALTH.getOperator().apply(gross))
-                    .multiply(BigDecimal.valueOf(Rates.TAX_RATE_17.getRate()))
-                    .setScale(2, RoundingMode.HALF_EVEN);
-        } else {
-            return gross.subtract(TOTAL_ZUS.getOperator().apply(gross))
-                    .subtract(HEALTH.getOperator().apply(gross))
-                    .multiply(BigDecimal.valueOf(Rates.TAX_RATE_32.getRate()))
-                    .setScale(2, RoundingMode.HALF_EVEN);
-        }
-    }, "Tax amount: "),
+    TAX(getTaxAmount(), "Tax amount: "),
 
 
     NET(gross -> gross.subtract(TOTAL_ZUS.operator.apply(gross)
@@ -50,6 +36,24 @@ public enum SalaryCalculator {
             .multiply(BigDecimal.valueOf(Rates.MONTH_NUMBER.getRate()))
             .setScale(2, RoundingMode.HALF_EVEN), "Yearly net amount: "),
     GROSS_MONTHLY(gross -> gross.setScale(2, RoundingMode.HALF_EVEN), "Monthly gross amount: ");
+
+     private static  UnaryOperator<BigDecimal> getTaxAmount() {
+        return gross -> {
+            if (GROSS_YEARLY.getOperator()
+                    .apply(gross)
+                    .compareTo(BigDecimal.valueOf(Rates.TAX_GROSS_AMOUNT_TRASHOLD.getRate())) < 0) {
+                return gross.subtract(TOTAL_ZUS.getOperator().apply(gross))
+                        .subtract(HEALTH.getOperator().apply(gross))
+                        .multiply(BigDecimal.valueOf(Rates.TAX_RATE_17.getRate()))
+                        .setScale(2, RoundingMode.HALF_EVEN);
+            } else {
+                return gross.subtract(TOTAL_ZUS.getOperator().apply(gross))
+                        .subtract(HEALTH.getOperator().apply(gross))
+                        .multiply(BigDecimal.valueOf(Rates.TAX_RATE_32.getRate()))
+                        .setScale(2, RoundingMode.HALF_EVEN);
+            }
+        };
+    }
 
     private final UnaryOperator<BigDecimal> operator;
     private final String description;

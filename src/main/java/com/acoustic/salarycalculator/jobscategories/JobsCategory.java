@@ -1,7 +1,6 @@
 package com.acoustic.salarycalculator.jobscategories;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -12,7 +11,7 @@ import lombok.Getter;
 @Getter
 public enum JobsCategory {
 
-    IT(1, "It", new ArrayList<>(List.of(
+    IT(1, "It", List.of(
             "DevOps Engineer",
             "Software Developer",
             "Software Engineer",
@@ -23,8 +22,8 @@ public enum JobsCategory {
             "IT Support Specialist",
             "Database Administrator",
             "System Architect",
-            "Web Administrator"))),
-    FINANCE(2, "Finance", new ArrayList<>(List.of(
+            "Web Administrator")),
+    FINANCE(2, "Finance", List.of(
             "Fund Accountant",
             "Depositary",
             "Accountant",
@@ -33,16 +32,16 @@ public enum JobsCategory {
             "Risk Analyst",
             "Business Analyst",
             "Billing Administrator",
-            "Financial Controller"))),
-    ENGINEER(3, "Engineer", new ArrayList<>(List.of(
+            "Financial Controller")),
+    ENGINEER(3, "Engineer", List.of(
             "Mechanic Engineer",
             "Civil Engineer",
             "Project Engineer",
             "Test Engineer",
             "Sales Engineer",
             "R&D Engineer",
-            "Thermal Engineer "))),
-    RESTAURANT(4, "Restaurant", new ArrayList<>(List.of(
+            "Thermal Engineer ")),
+    RESTAURANT(4, "Restaurant", List.of(
             "Executive Chef",
             "Assistant Manager",
             "General Manager",
@@ -53,15 +52,15 @@ public enum JobsCategory {
             "Bartender",
             "Cashier",
             "Dishwasher",
-            "Waitress"))),
-    AIRLINE(5, "Airline", new ArrayList<>(List.of(
+            "Waitress")),
+    AIRLINE(5, "Airline", List.of(
             "Air Crew",
             "Airline Captain",
             "Airline Pilot",
             "Airport Manager",
             "Analyst",
             "Chief Pilot",
-            "Traffic Manager")));
+            "Traffic Manager"));
 
 
     private final int jobId;

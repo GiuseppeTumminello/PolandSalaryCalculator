@@ -22,23 +22,21 @@ public class SalaryCalculatorPrinter {
     public void printAverage(BigDecimal monthlyAverage, BigDecimal grossMonthlySalary) {
         if (monthlyAverage != null) {
             if (monthlyAverage.compareTo(grossMonthlySalary) > 0) {
-                System.out.println(
-                        "The monthly gross average is " + monthlyAverage.setScale(2, RoundingMode.HALF_EVEN) +
-                                " and your monthly gross is " + grossMonthlySalary.setScale(2, RoundingMode.HALF_EVEN) +
-                                " and it is below of the threshold");
+                printAverageHelper(monthlyAverage, grossMonthlySalary, "below");
             } else if (monthlyAverage.compareTo(grossMonthlySalary) == 0) {
-                System.out.println(
-                        "The monthly gross average is " + monthlyAverage.setScale(2, RoundingMode.HALF_EVEN) +
-                                " and your monthly gross is " + grossMonthlySalary.setScale(2, RoundingMode.HALF_EVEN) +
-                                " and it is equal to the threshold");
+                printAverageHelper(monthlyAverage, grossMonthlySalary, "equal to");
             } else {
-                System.out.println(
-                        "The monthly gross average is " + monthlyAverage.setScale(2, RoundingMode.HALF_EVEN) +
-                                " and your monthly gross is " + grossMonthlySalary.setScale(2, RoundingMode.HALF_EVEN) +
-                                " and it is above of the threshold");
+                printAverageHelper(monthlyAverage,grossMonthlySalary, "above");
             }
 
         }
+    }
+
+    private void printAverageHelper(BigDecimal monthlyAverage, BigDecimal grossMonthlySalary, String equality) {
+        System.out.println(
+                "The monthly gross average is " + monthlyAverage.setScale(2, RoundingMode.HALF_EVEN) +
+                        " and your monthly gross is " + grossMonthlySalary.setScale(2, RoundingMode.HALF_EVEN) +
+                        " and it is " + equality +  " the threshold");
     }
 
 
