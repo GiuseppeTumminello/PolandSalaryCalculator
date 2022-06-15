@@ -6,17 +6,17 @@ import java.util.Scanner;
 
 import com.acoustic.salarycalculator.jobscategories.JobsCategory;
 import com.acoustic.salarycalculator.printer.SalaryCalculatorPrinter;
+import com.acoustic.salarycalculator.rates.Rates;
 
 
 public class SalaryCalculatorMenu {
 
-    private final Scanner scanner;
+    private Scanner scanner;
     private final SalaryCalculatorPrinter printerCalculator;
 
     public SalaryCalculatorMenu() {
-        this.scanner = new Scanner(System.in);
         this.printerCalculator = new SalaryCalculatorPrinter();
-
+        this.scanner = new Scanner(System.in);
     }
 
     public BigDecimal userInput() {
@@ -30,70 +30,57 @@ public class SalaryCalculatorMenu {
             }
             grossMonthlySalary = scanner.nextBigDecimal();
 
-
-        } while (grossMonthlySalary.compareTo(new BigDecimal("2000.00")) < 0);
+        } while (grossMonthlySalary.compareTo(BigDecimal.valueOf(Rates.MINIMUM_SALARY.getRate())) < 0);
 
 
         return grossMonthlySalary;
     }
 
-    public String surveyInput() {
-        System.out.println("\nDo you want to participate to the statistic ?\nPlease type yes or no:");
+    public int surveyInput() {
+
+        System.out.println("\nDo you want to participate to the statistic ?\nPlease type yes or y:");
         String choice;
-        while (true) {
-            try {
-                choice = scanner.nextLine();
-                if (choice.trim().equalsIgnoreCase("yes")) {
-                    printerCalculator.printJobFields();
-                    return jobFieldValidator();
-                } else if (choice.trim().equalsIgnoreCase("no")) {
-                    System.out.println("Thank you for using Salary Calculator");
-                    return null;
-                } else {
-                    throw new IllegalArgumentException();
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println("Wrong input, please try again: ");
-            }
+        choice = scanner.nextLine();
+        if (choice.trim().equalsIgnoreCase("yes") || choice.trim().equalsIgnoreCase("y")) {
+            printerCalculator.printJobFields();
+            return jobDepartmentValidator();
+        } else {
+            System.out.println("Thank you for using salary calculator");
         }
+        return 0;
     }
 
-    private String jobFieldValidator() {
+    private int jobDepartmentValidator() {
         while (true) {
             try {
-                System.out.println("Please enter a job field: ");
-                String jobField = scanner.nextLine();
+                System.out.println("Please enter a job field id: ");
+                int jobField = scanner.nextInt();
                 return Arrays.stream(JobsCategory.values())
-                        .map(JobsCategory::getDescription)
-                        .filter(description -> description.equalsIgnoreCase(jobField.trim()))
+                        .map(JobsCategory::getJobId)
+                        .filter(jobId -> jobId == jobField)
                         .findFirst()
                         .orElseThrow(IllegalArgumentException::new);
-
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid job field, please try again");
+            } catch (Exception e) {
+                System.out.println("Invalid job department id, please try again");
+                scanner.nextLine();
             }
         }
     }
 
-    public String jobTitleValidator(String jobField) {
+
+    public String jobTitleValidator(int jobField) {
         while (true) {
             try {
                 System.out.println("Please enter a job title: ");
-                String jobTitle = scanner.nextLine();
-                for (var jobFields : JobsCategory.values()) {
-                    if (jobFields.equals(JobsCategory.valueOf(jobField.toUpperCase()))) {
-                        for (var enumJobTitle : jobFields.getJobTitle()) {
-                            if (enumJobTitle.equalsIgnoreCase(jobTitle.trim())) {
-                                return enumJobTitle;
-                            }
-                        }
-                    }
-                }
+                int jobTitleId = scanner.nextInt();
+                return Arrays.stream(JobsCategory.values())
+                        .map(x -> x.getJobTitle().get(jobTitleId))
+                        .findFirst()
+                        .orElseThrow(IllegalArgumentException::new);
+            } catch (Exception e) {
 
-                throw new IllegalArgumentException();
-
-            } catch (IllegalArgumentException e) {
                 System.out.println("Invalid job title, please try again");
+                scanner.nextLine();
             }
         }
 

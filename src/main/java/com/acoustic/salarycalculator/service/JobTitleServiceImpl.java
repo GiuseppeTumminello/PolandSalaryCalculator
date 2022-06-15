@@ -26,6 +26,7 @@ public class JobTitleServiceImpl implements JobTitleService {
     public int save(BigDecimal grossMonthlySalary) {
         PreparedStatement preparedStatement;
         try {
+
             String saveAllDataQuery = "INSERT INTO public.salary_calculator(" +
                     "pension_zus, disability_zus, sickness_zus, total_zus, health, gross_yearly, tax, net_monthly, " +
                     "net_yearly, gross_monthly) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id";
@@ -40,7 +41,7 @@ public class JobTitleServiceImpl implements JobTitleService {
                 return resultSet.getInt("id");
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Inserting data inside the database failed, please check your setup,  table name or columns name  if they are correct");
         }
         return 0;
     }
@@ -55,8 +56,8 @@ public class JobTitleServiceImpl implements JobTitleService {
             if (resultSet.next()) {
                 return resultSet.getBigDecimal("avg");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Retrieving data from the database failed, please check your setup,  table name or columns name  if they are correct");
         }
         return null;
     }
@@ -69,7 +70,12 @@ public class JobTitleServiceImpl implements JobTitleService {
             preparedStatement.setString(1, jobTitle);
             preparedStatement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Updating data to the database failed, please check your setup,  table name or columns name  if they are correct");
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 }

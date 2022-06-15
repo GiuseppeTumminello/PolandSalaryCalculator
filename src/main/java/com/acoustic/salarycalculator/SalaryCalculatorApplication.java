@@ -1,6 +1,7 @@
 package com.acoustic.salarycalculator;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 
 import com.acoustic.salarycalculator.menu.SalaryCalculatorMenu;
 import com.acoustic.salarycalculator.printer.SalaryCalculatorPrinter;
@@ -10,7 +11,7 @@ import com.acoustic.salarycalculator.service.JobTitleServiceImpl;
 
 public class SalaryCalculatorApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
         SalaryCalculatorMenu menu = new SalaryCalculatorMenu();
         SalaryCalculatorPrinter printerCalculator = new SalaryCalculatorPrinter();
@@ -18,8 +19,8 @@ public class SalaryCalculatorApplication {
         BigDecimal grossMonthlySalary = menu.userInput();
         int id = averageSalaryService.save(grossMonthlySalary);
         printerCalculator.printSalaryCalculatorTax(grossMonthlySalary);
-        String jobField = menu.surveyInput();
-        if (jobField != null) {
+        int jobField = menu.surveyInput();
+        if (jobField != 0) {
             printerCalculator.printJobTitle(jobField);
             String jobTitle = menu.jobTitleValidator(jobField);
             averageSalaryService.updateJobTitle(id, jobTitle);
