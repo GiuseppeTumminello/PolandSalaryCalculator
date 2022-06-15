@@ -46,7 +46,7 @@ public class SalaryCalculatorPrinter {
 
     }
 
-    public void printJobTitle(int jobFieldId) { // TODO simply the method
+    public void printJobTitle(int jobFieldId) {
         try {
             Arrays.stream(JobsCategory.values())
                     .filter(jobsDepartment -> jobsDepartment.getJobId() == jobFieldId)
