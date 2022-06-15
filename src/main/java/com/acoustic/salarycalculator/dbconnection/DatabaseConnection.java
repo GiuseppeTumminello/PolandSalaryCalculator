@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 
-public class DatabaseConnection{
+public class DatabaseConnection {
 
     private final Properties properties;
-    private  Connection connection;
+    private Connection connection;
 
     public DatabaseConnection() {
         this.properties = new Properties();
@@ -28,6 +28,5 @@ public class DatabaseConnection{
         }
         return connection;
     }
-
 
 }

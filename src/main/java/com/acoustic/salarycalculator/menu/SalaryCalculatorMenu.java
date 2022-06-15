@@ -2,6 +2,7 @@ package com.acoustic.salarycalculator.menu;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.acoustic.salarycalculator.jobscategories.JobsCategory;
@@ -11,7 +12,7 @@ import com.acoustic.salarycalculator.rates.Rates;
 
 public class SalaryCalculatorMenu {
 
-    private Scanner scanner;
+    private final Scanner scanner;
     private final SalaryCalculatorPrinter printerCalculator;
 
     public SalaryCalculatorMenu() {
@@ -20,7 +21,6 @@ public class SalaryCalculatorMenu {
     }
 
     public BigDecimal userInput() {
-        Scanner scanner = new Scanner(System.in);
         BigDecimal grossMonthlySalary;
         do {
             System.out.println("Please enter a gross amount greater or equal to 2000.00");
@@ -31,13 +31,11 @@ public class SalaryCalculatorMenu {
             grossMonthlySalary = scanner.nextBigDecimal();
 
         } while (grossMonthlySalary.compareTo(BigDecimal.valueOf(Rates.MINIMUM_SALARY.getRate())) < 0);
-
-
+        scanner.nextLine();
         return grossMonthlySalary;
     }
 
     public int surveyInput() {
-
         System.out.println("\nDo you want to participate to the statistic ?\nPlease type yes or y:");
         String choice;
         choice = scanner.nextLine();
@@ -53,14 +51,14 @@ public class SalaryCalculatorMenu {
     private int jobDepartmentValidator() {
         while (true) {
             try {
-                System.out.println("Please enter a job field id: ");
-                int jobField = scanner.nextInt();
+                System.out.println("Please enter the job department id: ");
+                int jobDepartmentId = scanner.nextInt();
                 return Arrays.stream(JobsCategory.values())
                         .map(JobsCategory::getJobId)
-                        .filter(jobId -> jobId == jobField)
+                        .filter(jobCategoryId -> jobCategoryId == jobDepartmentId)
                         .findFirst()
                         .orElseThrow(IllegalArgumentException::new);
-            } catch (Exception e) {
+            } catch (IllegalArgumentException | InputMismatchException | NullPointerException exception) {
                 System.out.println("Invalid job department id, please try again");
                 scanner.nextLine();
             }
@@ -68,18 +66,21 @@ public class SalaryCalculatorMenu {
     }
 
 
-    public String jobTitleValidator(int jobField) {
+    public String jobTitleValidator(int jobDepartmentId) {
         while (true) {
             try {
                 System.out.println("Please enter a job title: ");
                 int jobTitleId = scanner.nextInt();
                 return Arrays.stream(JobsCategory.values())
-                        .map(x -> x.getJobTitle().get(jobTitleId))
+                        .filter(jobCategory -> jobCategory.getJobId() == jobDepartmentId &&
+                                jobCategory.getJobTitle().size() >= jobTitleId && jobTitleId >= 1)
                         .findFirst()
-                        .orElseThrow(IllegalArgumentException::new);
-            } catch (Exception e) {
+                        .orElseThrow(IllegalArgumentException::new)
+                        .getJobTitle()
+                        .get(jobTitleId);
 
-                System.out.println("Invalid job title, please try again");
+            } catch (IllegalArgumentException | InputMismatchException | NullPointerException e) {
+                System.out.println("Invalid job title id, please try again");
                 scanner.nextLine();
             }
         }

@@ -41,23 +41,25 @@ public class SalaryCalculatorPrinter {
 
     public void printJobFields() {
         Arrays.stream(JobsCategory.values())
-                .forEach(jobField -> System.out.println(jobField.getJobId() + " - " + jobField.getDescription()));
+                .forEach(jobDepartment -> System.out.println(
+                        jobDepartment.getJobId() + " - " + jobDepartment.getDescription()));
 
     }
 
-    public void printJobTitle(int jobFieldId) {
-        Arrays.stream(JobsCategory.values())
-                .filter(x -> x.getJobId() == jobFieldId)
-                .findFirst()
-                .get()
-                .getJobTitle()
-                .entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByKey())
-                .forEach(x -> System.out.println(x.getKey() + " - " + x.getValue()));
-
-
-
+    public void printJobTitle(int jobFieldId) { // TODO simply the method
+        try {
+            Arrays.stream(JobsCategory.values())
+                    .filter(jobsDepartment -> jobsDepartment.getJobId() == jobFieldId)
+                    .findFirst()
+                    .orElseThrow(IllegalArgumentException::new)
+                    .getJobTitle()
+                    .entrySet()
+                    .stream()
+                    .sorted(Map.Entry.comparingByKey())
+                    .forEach(x -> System.out.println(x.getKey() + " - " + x.getValue()));
+        } catch (IllegalArgumentException e) {
+            System.out.println("No job title available in the Job Category");
+        }
 
     }
 

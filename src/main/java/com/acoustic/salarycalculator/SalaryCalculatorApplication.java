@@ -1,7 +1,6 @@
 package com.acoustic.salarycalculator;
 
 import java.math.BigDecimal;
-import java.sql.SQLException;
 
 import com.acoustic.salarycalculator.menu.SalaryCalculatorMenu;
 import com.acoustic.salarycalculator.printer.SalaryCalculatorPrinter;
@@ -11,23 +10,41 @@ import com.acoustic.salarycalculator.service.JobTitleServiceImpl;
 
 public class SalaryCalculatorApplication {
 
-    public static void main(String[] args) throws SQLException {
+    SalaryCalculatorMenu menu;
+    SalaryCalculatorPrinter printerCalculator;
+    JobTitleService averageSalaryService;
 
-        SalaryCalculatorMenu menu = new SalaryCalculatorMenu();
-        SalaryCalculatorPrinter printerCalculator = new SalaryCalculatorPrinter();
-        JobTitleService averageSalaryService = new JobTitleServiceImpl();
+    public SalaryCalculatorApplication() {
+
+        this.menu = new SalaryCalculatorMenu();
+        this.printerCalculator = new SalaryCalculatorPrinter();
+        averageSalaryService = new JobTitleServiceImpl();
+    }
+
+    public static void main(String[] args) {
+        SalaryCalculatorApplication salaryCalculatorApplication = new SalaryCalculatorApplication();
+        BigDecimal grossMonthlySalary = salaryCalculatorApplication.salaryCalculator();
+        salaryCalculatorApplication.survey(grossMonthlySalary);
+
+    }
+
+    private BigDecimal salaryCalculator() {
         BigDecimal grossMonthlySalary = menu.userInput();
-        int id = averageSalaryService.save(grossMonthlySalary);
         printerCalculator.printSalaryCalculatorTax(grossMonthlySalary);
-        int jobField = menu.surveyInput();
-        if (jobField != 0) {
-            printerCalculator.printJobTitle(jobField);
-            String jobTitle = menu.jobTitleValidator(jobField);
-            averageSalaryService.updateJobTitle(id, jobTitle);
+        survey(grossMonthlySalary);
+        return grossMonthlySalary;
+    }
+
+    private void survey(
+            final BigDecimal grossMonthlySalary) {
+        int jobFieldId = menu.surveyInput();
+        if (jobFieldId != 0) {
+            printerCalculator.printJobTitle(jobFieldId);
+            String jobTitle = menu.jobTitleValidator(jobFieldId);
+            averageSalaryService.save(grossMonthlySalary, jobTitle);
             BigDecimal monthlyJobFieldAverage = averageSalaryService.getAverageByJobTile(jobTitle);
             printerCalculator.printAverage(monthlyJobFieldAverage, grossMonthlySalary);
         }
-
     }
 
 }

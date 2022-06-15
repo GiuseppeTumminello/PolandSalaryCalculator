@@ -28,16 +28,21 @@ public enum SalaryCalculator {
     TAX(getTaxAmount(), "Tax amount: "),
 
 
-    NET(gross -> gross.subtract(TOTAL_ZUS.operator.apply(gross)
-                    .add((TAX.operator.apply(gross)).add(HEALTH.operator.apply(gross))))
-            .setScale(2, RoundingMode.HALF_EVEN), "Net amount: "),
+    NET(
+            gross -> gross.subtract(TOTAL_ZUS.operator.apply(gross)
+                            .add((TAX.operator.apply(gross)).add(HEALTH.operator.apply(gross))))
+                    .setScale(2, RoundingMode.HALF_EVEN),
+            "Net amount: "),
     NET_YEARLY(gross -> NET.getOperator()
             .apply(gross)
             .multiply(BigDecimal.valueOf(Rates.MONTH_NUMBER.getRate()))
             .setScale(2, RoundingMode.HALF_EVEN), "Yearly net amount: "),
     GROSS_MONTHLY(gross -> gross.setScale(2, RoundingMode.HALF_EVEN), "Monthly gross amount: ");
 
-     private static  UnaryOperator<BigDecimal> getTaxAmount() {
+    private final UnaryOperator<BigDecimal> operator;
+    private final String description;
+
+    private static UnaryOperator<BigDecimal> getTaxAmount() {
         return gross -> {
             if (GROSS_YEARLY.getOperator()
                     .apply(gross)
@@ -54,8 +59,5 @@ public enum SalaryCalculator {
             }
         };
     }
-
-    private final UnaryOperator<BigDecimal> operator;
-    private final String description;
 
 }
