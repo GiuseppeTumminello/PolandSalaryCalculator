@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.function.UnaryOperator;
 
-import com.acoustic.salarycalculator.jobscategories.JobsCategory;
 import com.acoustic.salarycalculator.rates.Rates;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,25 +20,37 @@ public enum SalaryCalculator {
             .setScale(2, RoundingMode.HALF_EVEN), "Sickness zus amount: "),
     TOTAL_ZUS(gross -> gross.multiply(BigDecimal.valueOf(Rates.TOTAL_ZUS_RATE.getRate()))
             .setScale(2, RoundingMode.HALF_EVEN), "Total zus amount: "),
-    HEALTH(gross -> gross.subtract(TOTAL_ZUS.getOperator().apply(gross))
-            .multiply(BigDecimal.valueOf(Rates.HEALTH_RATE.getRate()))
-            .setScale(2, RoundingMode.HALF_EVEN), "Health amount: "),
+    HEALTH(getHealth(), "Health amount: "),
     GROSS_YEARLY(gross -> gross.multiply(BigDecimal.valueOf(Rates.MONTH_NUMBER.getRate()))
             .setScale(2, RoundingMode.HALF_EVEN), "Yearly gross amount: "),
     TAX(getTaxAmount(), "Tax amount: "),
 
-
-    NET(gross -> gross.subtract(TOTAL_ZUS.operator.apply(gross)
-                    .add((TAX.operator.apply(gross)).add(HEALTH.operator.apply(gross))))
-            .setScale(2, RoundingMode.HALF_EVEN), "Net amount: "),
-    NET_YEARLY(gross -> NET.getOperator()
-            .apply(gross)
-            .multiply(BigDecimal.valueOf(Rates.MONTH_NUMBER.getRate()))
-            .setScale(2, RoundingMode.HALF_EVEN), "Yearly net amount: "),
+    NET(getNet(), "Net amount: "),
+    NET_YEARLY(getNetYearly(), "Yearly net amount: "),
     GROSS_MONTHLY(gross -> gross.setScale(2, RoundingMode.HALF_EVEN), "Monthly gross amount: ");
 
     private final UnaryOperator<BigDecimal> operator;
     private final String description;
+
+    private static UnaryOperator<BigDecimal> getHealth() {
+        return gross -> gross.subtract(TOTAL_ZUS.getOperator().apply(gross))
+                .multiply(BigDecimal.valueOf(Rates.HEALTH_RATE.getRate()))
+                .setScale(2, RoundingMode.HALF_EVEN);
+    }
+
+    private static UnaryOperator<BigDecimal> getNet() {
+        return gross -> gross.subtract(TOTAL_ZUS.operator.apply(gross)
+                        .add((TAX.operator.apply(gross)).add(HEALTH.operator.apply(gross))))
+                .setScale(2, RoundingMode.HALF_EVEN);
+    }
+
+
+    private static UnaryOperator<BigDecimal> getNetYearly() {
+        return gross -> NET.getOperator()
+                .apply(gross)
+                .multiply(BigDecimal.valueOf(Rates.MONTH_NUMBER.getRate()))
+                .setScale(2, RoundingMode.HALF_EVEN);
+    }
 
     private static UnaryOperator<BigDecimal> getTaxAmount() {
         return gross -> {
