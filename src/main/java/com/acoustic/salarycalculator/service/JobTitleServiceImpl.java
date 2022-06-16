@@ -47,7 +47,7 @@ public class JobTitleServiceImpl implements JobTitleService {
 
 
     @Override
-    public BigDecimal getAverageByJobTile(String jobTitle) {
+    public BigDecimal getAverageByJobTitle(String jobTitle) {
         try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "select avg(gross_monthly) from salary_calculator where job_title= '" + jobTitle + "'");

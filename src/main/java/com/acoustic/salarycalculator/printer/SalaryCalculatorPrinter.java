@@ -3,7 +3,7 @@ package com.acoustic.salarycalculator.printer;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
-import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.acoustic.salarycalculator.calculator.SalaryCalculator;
 import com.acoustic.salarycalculator.jobscategories.JobsCategory;
@@ -48,17 +48,15 @@ public class SalaryCalculatorPrinter {
 
     public void printJobTitle(int jobFieldId) {
         try {
+            final AtomicInteger count = new AtomicInteger(1);
             Arrays.stream(JobsCategory.values())
                     .filter(jobsDepartment -> jobsDepartment.getJobId() == jobFieldId)
                     .findFirst()
                     .orElseThrow(IllegalArgumentException::new)
                     .getJobTitle()
-                    .entrySet()
-                    .stream()
-                    .sorted(Map.Entry.comparingByKey())
-                    .forEach(mapValues -> System.out.println(mapValues.getKey() + " - " + mapValues.getValue()));
+                    .forEach(JobTitle -> System.out.println(count.getAndIncrement() + " - " + JobTitle));
         } catch (IllegalArgumentException exception) {
-            System.out.println("No job title available in the Job Category");
+            System.out.println("No job title available in the job category");
         }
 
     }

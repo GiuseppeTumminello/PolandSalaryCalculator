@@ -7,6 +7,6 @@ public interface JobTitleService {
 
     void save(BigDecimal grossSalary, String jobTitle);
 
-    BigDecimal getAverageByJobTile(String jobTitle);
+    BigDecimal getAverageByJobTitle(String jobTitle);
 
 }

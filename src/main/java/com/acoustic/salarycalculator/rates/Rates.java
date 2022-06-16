@@ -18,7 +18,7 @@ public enum Rates {
     TAX_RATE_32(0.1432d),
     TAX_GROSS_AMOUNT_TRASHOLD(120000.0d),
     MONTH_NUMBER(12.0d),
-    MINIMUM_SALARY(2000.00);
+    MINIMUM_SALARY(2000.00d);
 
     private final double rate;
 

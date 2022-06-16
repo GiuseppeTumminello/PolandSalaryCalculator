@@ -23,7 +23,7 @@ public class SalaryCalculatorInputValidation {
     public BigDecimal userInput() {
         BigDecimal grossMonthlySalary;
         do {
-            System.out.println("Please enter a gross amount greater or equal to 2000.00");
+            System.out.println("Please enter a gross amount greater or equal to " + Rates.MINIMUM_SALARY.getRate());
             while (!scanner.hasNextBigDecimal()) {
                 System.out.println("That's not a valid number, please try again: ");
                 scanner.next();
@@ -44,8 +44,9 @@ public class SalaryCalculatorInputValidation {
             return jobDepartmentValidator();
         } else {
             System.out.println("Thank you for using salary calculator");
+            return 0;
         }
-        return 0;
+
     }
 
     private int jobDepartmentValidator() {
@@ -53,11 +54,10 @@ public class SalaryCalculatorInputValidation {
             try {
                 System.out.println("Please enter the job department id: ");
                 int jobDepartmentId = scanner.nextInt();
-                 return Arrays.stream(JobsCategory.values())
-                         .map(JobsCategory::getJobId)
-                         .filter(jobCategoryId -> jobCategoryId == jobDepartmentId)
-                         .findFirst()
-                         .orElseThrow(IllegalArgumentException::new);
+                return Arrays.stream(JobsCategory.values())
+                        .filter(jobCategory -> jobCategory.getJobId() == jobDepartmentId)
+                        .findFirst()
+                        .orElseThrow(IllegalArgumentException::new).getJobId();
 
             } catch (IllegalArgumentException | InputMismatchException | NullPointerException exception) {
                 System.out.println("Invalid job department id, please try again");
@@ -70,7 +70,7 @@ public class SalaryCalculatorInputValidation {
     public String jobTitleValidator(int jobDepartmentId) {
         while (true) {
             try {
-                System.out.println("Please enter a job title: ");
+                System.out.println("Please enter the job title id: ");
                 int jobTitleId = scanner.nextInt();
                 return Arrays.stream(JobsCategory.values())
                         .filter(jobCategory -> jobCategory.getJobId() == jobDepartmentId &&
@@ -78,7 +78,7 @@ public class SalaryCalculatorInputValidation {
                         .findFirst()
                         .orElseThrow(IllegalArgumentException::new)
                         .getJobTitle()
-                        .get(jobTitleId);
+                        .get(jobTitleId - 1);
 
             } catch (IllegalArgumentException | InputMismatchException | NullPointerException exception) {
                 System.out.println("Invalid job title id, please try again");

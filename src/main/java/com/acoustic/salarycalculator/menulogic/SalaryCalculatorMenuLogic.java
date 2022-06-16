@@ -21,8 +21,6 @@ public class SalaryCalculatorMenuLogic {
     }
 
 
-
-
     public BigDecimal salaryCalculator() {
         BigDecimal grossMonthlySalary = salaryCalculatorInputValidation.userInput();
         printerCalculator.printSalaryCalculatorTax(grossMonthlySalary);
@@ -35,8 +33,8 @@ public class SalaryCalculatorMenuLogic {
             printerCalculator.printJobTitle(jobDepartmentId);
             String jobTitle = salaryCalculatorInputValidation.jobTitleValidator(jobDepartmentId);
             averageSalaryService.save(grossMonthlySalary, jobTitle);
-            BigDecimal monthlyJobFieldAverage = averageSalaryService.getAverageByJobTile(jobTitle);
-            printerCalculator.printAverage(monthlyJobFieldAverage, grossMonthlySalary);
+            BigDecimal monthlyJobTitleAverage = averageSalaryService.getAverageByJobTitle(jobTitle);
+            printerCalculator.printAverage(monthlyJobTitleAverage, grossMonthlySalary);
         }
     }
 
