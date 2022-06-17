@@ -20,9 +20,7 @@ public class DatabaseConnection {
         try {
             properties.setProperty("user", DatabaseConfig.USER);
             properties.setProperty("password", DatabaseConfig.PASSWORD);
-
             connection = DriverManager.getConnection(DatabaseConfig.DATABASE_LOCAL_URL, properties);
-
         } catch (SQLException exception) {
             System.out.println("Connection to the database failed, please check your setup");
         }
