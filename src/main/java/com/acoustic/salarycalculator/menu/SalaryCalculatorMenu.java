@@ -1,4 +1,4 @@
-package com.acoustic.salarycalculator.menulogic;
+package com.acoustic.salarycalculator.menu;
 
 import java.math.BigDecimal;
 
@@ -8,13 +8,13 @@ import com.acoustic.salarycalculator.service.JobTitleService;
 import com.acoustic.salarycalculator.service.JobTitleServiceImpl;
 
 
-public class SalaryCalculatorMenuLogic {
+public class SalaryCalculatorMenu {
 
     private final SalaryCalculatorInputValidation salaryCalculatorInputValidation;
     private final SalaryCalculatorPrinter printerCalculator;
     private final JobTitleService averageSalaryService;
 
-    public SalaryCalculatorMenuLogic() {
+    public SalaryCalculatorMenu() {
         this.salaryCalculatorInputValidation = new SalaryCalculatorInputValidation();
         this.printerCalculator = new SalaryCalculatorPrinter();
         this.averageSalaryService = new JobTitleServiceImpl();
