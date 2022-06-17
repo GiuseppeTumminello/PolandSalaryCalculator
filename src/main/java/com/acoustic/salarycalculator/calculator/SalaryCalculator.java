@@ -12,17 +12,12 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum SalaryCalculator {
-    PENSION_ZUS(gross -> gross.multiply(BigDecimal.valueOf(Rates.PENSION_ZUS_RATE.getRate()))
-            .setScale(2, RoundingMode.HALF_EVEN), "Pension Zus amount: "),
-    DISABILITY_ZUS(gross -> gross.multiply(BigDecimal.valueOf(Rates.DISABILITY_ZUS_RATE.getRate()))
-            .setScale(2, RoundingMode.HALF_EVEN), "Disability zus amount: "),
-    SICKNESS_ZUS(gross -> gross.multiply(BigDecimal.valueOf(Rates.SICKNESS_ZUS_RATE.getRate()))
-            .setScale(2, RoundingMode.HALF_EVEN), "Sickness zus amount: "),
-    TOTAL_ZUS(gross -> gross.multiply(BigDecimal.valueOf(Rates.TOTAL_ZUS_RATE.getRate()))
-            .setScale(2, RoundingMode.HALF_EVEN), "Total zus amount: "),
+    PENSION_ZUS(getCalculationByRate(Rates.PENSION_ZUS_RATE), "Pension Zus amount: "),
+    DISABILITY_ZUS(getCalculationByRate(Rates.DISABILITY_ZUS_RATE), "Disability zus amount: "),
+    SICKNESS_ZUS(getCalculationByRate(Rates.SICKNESS_ZUS_RATE), "Sickness zus amount: "),
+    TOTAL_ZUS(getCalculationByRate(Rates.TOTAL_ZUS_RATE), "Total zus amount: "),
     HEALTH(getHealth(), "Health amount: "),
-    GROSS_YEARLY(gross -> gross.multiply(BigDecimal.valueOf(Rates.MONTH_NUMBER.getRate()))
-            .setScale(2, RoundingMode.HALF_EVEN), "Yearly gross amount: "),
+    GROSS_YEARLY(getCalculationByRate(Rates.MONTH_NUMBER), "Yearly gross amount: "),
     TAX(getTaxAmount(), "Tax amount: "),
 
     NET(getNet(), "Net amount: "),
@@ -31,6 +26,11 @@ public enum SalaryCalculator {
 
     private final UnaryOperator<BigDecimal> operator;
     private final String description;
+
+    private static UnaryOperator<BigDecimal> getCalculationByRate(Rates rate) {
+        return gross -> gross.multiply(BigDecimal.valueOf(rate.getRate())).setScale(2, RoundingMode.HALF_EVEN);
+    }
+
 
     private static UnaryOperator<BigDecimal> getHealth() {
         return gross -> gross.subtract(TOTAL_ZUS.getOperator().apply(gross))

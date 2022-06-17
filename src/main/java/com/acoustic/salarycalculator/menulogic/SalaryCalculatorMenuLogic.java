@@ -27,9 +27,9 @@ public class SalaryCalculatorMenuLogic {
         return grossMonthlySalary;
     }
 
-    public void survey(BigDecimal grossMonthlySalary) {
+    public void statistics(BigDecimal grossMonthlySalary) {
         int jobDepartmentId = salaryCalculatorInputValidation.surveyInput();
-        if (jobDepartmentId != 0) {
+        if (jobDepartmentId != -1) {
             printerCalculator.printJobTitle(jobDepartmentId);
             String jobTitle = salaryCalculatorInputValidation.jobTitleValidator(jobDepartmentId);
             averageSalaryService.save(grossMonthlySalary, jobTitle);

@@ -44,7 +44,7 @@ public class SalaryCalculatorInputValidation {
             return jobDepartmentValidator();
         } else {
             System.out.println("Thank you for using salary calculator");
-            return 0;
+            return -1;
         }
 
     }
@@ -57,8 +57,8 @@ public class SalaryCalculatorInputValidation {
                 return Arrays.stream(JobsCategory.values())
                         .filter(jobCategory -> jobCategory.getJobId() == jobDepartmentId)
                         .findFirst()
-                        .orElseThrow(IllegalArgumentException::new).getJobId();
-
+                        .orElseThrow(IllegalArgumentException::new)
+                        .getJobId();
             } catch (IllegalArgumentException | InputMismatchException | NullPointerException exception) {
                 System.out.println("Invalid job department id, please try again");
                 scanner.nextLine();

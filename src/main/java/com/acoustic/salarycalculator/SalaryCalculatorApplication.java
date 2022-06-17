@@ -11,7 +11,7 @@ public class SalaryCalculatorApplication {
     public static void main(String[] args) {
         SalaryCalculatorMenuLogic salaryCalculatorMenuLogic = new SalaryCalculatorMenuLogic();
         BigDecimal grossMonthlySalary = salaryCalculatorMenuLogic.salaryCalculator();
-        salaryCalculatorMenuLogic.survey(grossMonthlySalary);
+        salaryCalculatorMenuLogic.statistics(grossMonthlySalary);
 
     }
 

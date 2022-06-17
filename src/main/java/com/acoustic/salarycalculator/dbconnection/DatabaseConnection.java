@@ -16,7 +16,6 @@ public class DatabaseConnection {
     }
 
     public Connection getConnection() {
-
         try {
             properties.setProperty("user", DatabaseConfig.USER);
             properties.setProperty("password", DatabaseConfig.PASSWORD);

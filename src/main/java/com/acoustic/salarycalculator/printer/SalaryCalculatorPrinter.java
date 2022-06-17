@@ -46,11 +46,11 @@ public class SalaryCalculatorPrinter {
 
     }
 
-    public void printJobTitle(int jobFieldId) {
+    public void printJobTitle(int jobDepartmentId) {
         try {
             final AtomicInteger count = new AtomicInteger(1);
             Arrays.stream(JobsCategory.values())
-                    .filter(jobsDepartment -> jobsDepartment.getJobId() == jobFieldId)
+                    .filter(jobsDepartment -> jobsDepartment.getJobId() == jobDepartmentId)
                     .findFirst()
                     .orElseThrow(IllegalArgumentException::new)
                     .getJobTitle()
