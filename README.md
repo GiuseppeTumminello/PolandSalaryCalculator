@@ -100,25 +100,20 @@ The application uses Postgres SQL Server, which runs in a Docker container. Plea
     -v pgdata:/var/lib/postgresql/data \
     postgres
   
-* Docker compose file: docker-compose-pg.yml
-  * Go to the folder: /PolandSalaryCalculator/src/main/resources/docker/dockercompose
-  * execute: docker-compose -f docker-compose-pg.yml up
-
-
 
 * Docker container PgAdmin4: 
   * docker pull dpage/pgadmin4
   * docker run --name my-own-postgres -e POSTGRES_PASSWORD=postgresmaster -p 5432:5432 -d postgres
   
-* Docker compose file: docker-compose-pgadmin4.yml
-  * Go to the folder: /PolandSalaryCalculator/src/main/resources/docker/dockercompose
-  * execute: docker-compose -f docker-compose-pgadmin4.yml up
+* Docker compose file: docker-compose-salary-application.yml
+  * Go to the folder: PolandSalaryCalculator
+  * execute: docker-compose -f docker-compose-salary-application.yml up
 
 * Create a table in PostgreSQL by executing the create table query.
 
   * CREATE TABLE IF NOT EXISTS public.salary_calculator ( id integer NOT NULL DEFAULT nextval('salary_calculator_id_seq'::regclass), pension_zus numeric, disability_zus numeric, sickness_zus numeric, total_zus numeric, health numeric, gross_yearly numeric, tax numeric, net_monthly numeric, net_yearly numeric, gross_monthly numeric, job_title character varying COLLATE pg_catalog."default", CONSTRAINT salary_calculator_pkey PRIMARY KEY (id) )
 
-# How to run?
+# How to run from the IDE?
 
 Clone the git repository, open the project with your favorite IDE, go to the DatabaseConfig class, and update the following fields according to your setup:
 
@@ -128,6 +123,13 @@ Clone the git repository, open the project with your favorite IDE, go to the Dat
 * USER
 
 Once the database configuration is set, go to the SalaryCalculatorApplication class and run the main method.
+
+# How to run in Docker ?
+
+Clone the git repository and run the follwowing command:
+
+* docker run -it --rm --network=bridge polandsalarycalculator_salary_calculator
+
 
 
 
