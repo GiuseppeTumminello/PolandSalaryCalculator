@@ -53,22 +53,18 @@ public enum SalaryCalculator {
     }
 
     private static UnaryOperator<BigDecimal> getTaxAmount() {
-        return gross -> {
-            if (GROSS_YEARLY.getOperator()
-                    .apply(gross)
-                    .compareTo(BigDecimal.valueOf(Rates.TAX_GROSS_AMOUNT_TRASHOLD.getRate())) < 0) {
-                return gross.subtract(TOTAL_ZUS.getOperator().apply(gross))
-                        .subtract(HEALTH.getOperator().apply(gross))
-                        .multiply(BigDecimal.valueOf(Rates.TAX_RATE_17.getRate()))
-                        .setScale(2, RoundingMode.HALF_EVEN);
-            } else {
-                return gross.subtract(TOTAL_ZUS.getOperator().apply(gross))
-                        .subtract(HEALTH.getOperator().apply(gross))
-                        .multiply(BigDecimal.valueOf(Rates.TAX_RATE_32.getRate()))
-                        .setScale(2, RoundingMode.HALF_EVEN);
+        return gross -> (GROSS_YEARLY.getOperator()
+                .apply(gross)
+                .compareTo(BigDecimal.valueOf(Rates.TAX_GROSS_AMOUNT_TRASHOLD.getRate())) < 0) ?
+                getTaxAmountBasedOnRate(gross, Rates.TAX_RATE_17) : getTaxAmountBasedOnRate(gross, Rates.TAX_RATE_32);
+    }
 
-            }
-        };
+
+    private static BigDecimal getTaxAmountBasedOnRate(BigDecimal gross, Rates rate) {
+        return gross.subtract(TOTAL_ZUS.getOperator().apply(gross))
+                .subtract(HEALTH.getOperator().apply(gross))
+                .multiply(BigDecimal.valueOf(rate.getRate()))
+                .setScale(2, RoundingMode.HALF_EVEN);
     }
 
 }

@@ -3,6 +3,7 @@ package com.acoustic.salarycalculator.menu;
 import java.math.BigDecimal;
 
 import com.acoustic.salarycalculator.inputvalidation.SalaryCalculatorInputValidation;
+import com.acoustic.salarycalculator.jobscategories.JobsCategory;
 import com.acoustic.salarycalculator.printer.SalaryCalculatorPrinter;
 import com.acoustic.salarycalculator.service.JobTitleService;
 import com.acoustic.salarycalculator.service.JobTitleServiceImpl;
@@ -28,10 +29,10 @@ public class SalaryCalculatorMenu {
     }
 
     public void statistics(BigDecimal grossMonthlySalary) {
-        int jobDepartmentId = salaryCalculatorInputValidation.surveyInput();
-        if (jobDepartmentId != -1) {
-            printerCalculator.printJobTitle(jobDepartmentId);
-            String jobTitle = salaryCalculatorInputValidation.jobTitleValidator(jobDepartmentId);
+        JobsCategory jobsCategory = salaryCalculatorInputValidation.surveyInput();
+        if (jobsCategory != null) {
+            printerCalculator.printJobTitle(jobsCategory);
+            String jobTitle = salaryCalculatorInputValidation.jobTitleValidator(jobsCategory);
             averageSalaryService.save(grossMonthlySalary, jobTitle);
             BigDecimal monthlyJobTitleAverage = averageSalaryService.getAverageByJobTitle(jobTitle);
             printerCalculator.printAverage(monthlyJobTitleAverage, grossMonthlySalary);
