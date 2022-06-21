@@ -55,8 +55,9 @@ public enum SalaryCalculator {
     private static UnaryOperator<BigDecimal> getTaxAmount() {
         return gross -> (GROSS_YEARLY.getOperator()
                 .apply(gross)
-                .compareTo(BigDecimal.valueOf(Rates.TAX_GROSS_AMOUNT_TRASHOLD.getRate())) < 0) ?
-                getTaxAmountBasedOnRate(gross, Rates.TAX_RATE_32) : getTaxAmountBasedOnRate(gross, Rates.TAX_RATE_17);
+                .compareTo(BigDecimal.valueOf(Rates.TAX_GROSS_AMOUNT_TRASHOLD.getRate())) < 0)
+                ? getTaxAmountBasedOnRate(gross, Rates.TAX_RATE_32)
+                : getTaxAmountBasedOnRate(gross, Rates.TAX_RATE_17);
     }
 
 

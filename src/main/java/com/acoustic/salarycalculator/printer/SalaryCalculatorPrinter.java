@@ -49,8 +49,7 @@ public class SalaryCalculatorPrinter {
     public void printJobTitle(JobsCategory jobsCategory) {
         try {
             final AtomicInteger count = new AtomicInteger(1);
-            jobsCategory
-                    .getJobTitle()
+            jobsCategory.getJobTitle()
                     .forEach(JobTitle -> System.out.println(count.getAndIncrement() + " - " + JobTitle));
         } catch (IllegalArgumentException exception) {
             System.out.println("No job title available in the job category");

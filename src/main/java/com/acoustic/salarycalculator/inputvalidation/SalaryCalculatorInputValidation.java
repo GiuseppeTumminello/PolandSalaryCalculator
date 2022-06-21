@@ -71,11 +71,10 @@ public class SalaryCalculatorInputValidation {
             try {
                 System.out.println("Please enter the job title id: ");
                 int jobTitleId = scanner.nextInt();
-                return jobsCategory
-                        .getJobTitle()
-                        .get(jobTitleId - 1);
+                return jobsCategory.getJobTitle().get(jobTitleId - 1);
 
-            } catch (IllegalArgumentException | InputMismatchException | NullPointerException  | ArrayIndexOutOfBoundsException exception) {
+            } catch (IllegalArgumentException | InputMismatchException | NullPointerException |
+                     ArrayIndexOutOfBoundsException exception) {
                 System.out.println("Invalid job title id, please try again");
                 scanner.nextLine();
             }
