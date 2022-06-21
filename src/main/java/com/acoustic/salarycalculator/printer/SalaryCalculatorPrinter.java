@@ -46,13 +46,10 @@ public class SalaryCalculatorPrinter {
 
     }
 
-    public void printJobTitle(int jobDepartmentId) {
+    public void printJobTitle(JobsCategory jobsCategory) {
         try {
             final AtomicInteger count = new AtomicInteger(1);
-            Arrays.stream(JobsCategory.values())
-                    .filter(jobsDepartment -> jobsDepartment.getJobId() == jobDepartmentId)
-                    .findFirst()
-                    .orElseThrow(IllegalArgumentException::new)
+            jobsCategory
                     .getJobTitle()
                     .forEach(JobTitle -> System.out.println(count.getAndIncrement() + " - " + JobTitle));
         } catch (IllegalArgumentException exception) {

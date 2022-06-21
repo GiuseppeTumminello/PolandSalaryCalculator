@@ -35,21 +35,21 @@ public class SalaryCalculatorInputValidation {
         return grossMonthlySalary;
     }
 
-    public int surveyInput() {
+    public JobsCategory surveyInput() {
         System.out.println("\nDo you want to participate to the statistic ?\nPlease type yes or y:");
         String choice;
         choice = scanner.nextLine();
         if (choice.trim().equalsIgnoreCase("yes") || choice.trim().equalsIgnoreCase("y")) {
             printerCalculator.printJobDepartment();
-            return jobDepartmentValidator();
+            return getJobCategory();
         } else {
             System.out.println("Thank you for using salary calculator");
-            return -1;
+            return null;
         }
 
     }
 
-    private int jobDepartmentValidator() {
+    private JobsCategory getJobCategory() {
         while (true) {
             try {
                 System.out.println("Please enter the job department id: ");
@@ -57,8 +57,7 @@ public class SalaryCalculatorInputValidation {
                 return Arrays.stream(JobsCategory.values())
                         .filter(jobCategory -> jobCategory.getJobId() == jobDepartmentId)
                         .findFirst()
-                        .orElseThrow(IllegalArgumentException::new)
-                        .getJobId();
+                        .orElseThrow(IllegalArgumentException::new);
             } catch (IllegalArgumentException | InputMismatchException | NullPointerException exception) {
                 System.out.println("Invalid job department id, please try again");
                 scanner.nextLine();
@@ -67,20 +66,16 @@ public class SalaryCalculatorInputValidation {
     }
 
 
-    public String jobTitleValidator(int jobDepartmentId) {
+    public String jobTitleValidator(JobsCategory jobsCategory) {
         while (true) {
             try {
                 System.out.println("Please enter the job title id: ");
                 int jobTitleId = scanner.nextInt();
-                return Arrays.stream(JobsCategory.values())
-                        .filter(jobCategory -> jobCategory.getJobId() == jobDepartmentId &&
-                                jobCategory.getJobTitle().size() >= jobTitleId && jobTitleId >= 1)
-                        .findFirst()
-                        .orElseThrow(IllegalArgumentException::new)
+                return jobsCategory
                         .getJobTitle()
                         .get(jobTitleId - 1);
 
-            } catch (IllegalArgumentException | InputMismatchException | NullPointerException exception) {
+            } catch (IllegalArgumentException | InputMismatchException | NullPointerException  | ArrayIndexOutOfBoundsException exception) {
                 System.out.println("Invalid job title id, please try again");
                 scanner.nextLine();
             }
